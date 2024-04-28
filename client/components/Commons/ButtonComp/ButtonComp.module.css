@@ -1,0 +1,14 @@
+.ButtonComp {
+    width: 100%;
+    background-color: var(--main-bg-color) !important;
+    color: white;
+    height: 56px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 23px;
+}
+
+.ButtonComp:hover {
+    color: white !important;
+    background-color: var(--main-bg-dark-color);
+}

@@ -1,0 +1,28 @@
+.faqs{
+    color: #FCFFFF;
+    padding-top: 20px;
+    padding-left: 170px;
+    padding-right: 170px;
+    padding-bottom: 60px;
+}
+.faqs .links a{
+    color: #FCFFFF;
+    text-decoration: none;
+    font-size: 12px;
+}
+.faqs .links{
+    justify-content: center;
+    align-items: center;
+    }
+.faqs .headlist{
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: "Playfair Display", serif !important;
+}
+@media (max-width:750px) {
+    .faqs{
+        padding: 20px;
+    } 
+}

@@ -1,0 +1,18 @@
+.CategoryCard {
+    color: white;
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.CategoryCard img {
+    object-fit: cover;
+    width: 100% !important;
+    height: 200px !important;
+}
+
+.CategoryCard h2 {
+    color: black;
+    text-align: center;
+    margin: 15px 0px;
+    font-size: 21px;
+}

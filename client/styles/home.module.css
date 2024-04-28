@@ -1,0 +1,41 @@
+.home {
+    background-color: var(--main-body-bg-color);
+}
+
+.home header {
+    margin-bottom: 100px;
+}
+
+.home .specialSection {
+    background-color: rgba(207, 204, 204, 0.3);
+    padding: 40px;
+}
+
+.home .title {
+    font-size: 43px;
+    font-weight: 600;
+    margin-bottom: 23px;
+}
+
+.home .homeFooter {
+    text-align: center;
+    padding: 23px 100px;
+}
+
+.home .homeFooter p {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.home .categories {
+    padding: 100px 30px;
+}
+
+.home .categories a div {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+.home .categories a div img {
+    height: 300px !important;
+}

@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-body-bg-color: #E9EFEF;
+  --main-bg-color: #083652;
+  --main-bg-dark-color: #041b29;
+  --main-hover-color: #041b29;
+  --main-text-color: #000;
+  --text-secondary-color: #333333;
+}
+
+body,
+html {
+  background: #fff !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  overflow-x: hidden !important;
+}
+
+.ant-checkbox-inner {
+  background-color: var(--main-bg-color) !important;
+}
+
+.AdminSidebar {
+  background-color: white !important;
+}
+
+.AdminSidebar button {
+  background-color: transparent !important;
+  color: black !important;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.AdminSidebar .activeLink {
+  background-color: var(--main-bg-dark-color) !important;
+  color: white !important;
+}
+
+.ant-btn-primary {
+  background-color: var(--main-bg-color) !important;
+  color: white;
+  width: 100%;
+}
+
+.swiper-pagination {
+  position: relative !important;
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  /* bottom: -10px !important; */
+  z-index: 10000 !important;
+}
+
+.carousel .thumbs-wrapper {
+  margin-top: 0px !important;
+}
+
+.thumbs li {
+  width: 100px !important;
+  padding: 0px !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 21px !important;
+  font-weight: bold !important;
+}

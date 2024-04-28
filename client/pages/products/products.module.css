@@ -1,0 +1,90 @@
+.products {
+    margin: 0px;
+}
+
+.products .top {
+    padding: 40px;
+}
+
+.products .top h1 {
+    margin-bottom: 0px;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.products .top p {
+    margin-bottom: 32px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.products .scroll {
+    overflow-x: hidden !important;
+}
+
+.products .filters .sortSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 40px;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 23px;
+    padding-top: 15px;
+}
+
+.products .filters .sortSection .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.products .sortSection .sortSelect {
+    width: 200px;
+}
+
+.products .sortSection .sortSelect>div,
+.products .filters .filterSection .select>div {
+    border: none !important;
+}
+
+.products .sortSection h4 {
+    font-size: 23px;
+}
+
+.products .sortSection p {
+    font-size: 17px;
+    color: #999;
+}
+
+.products .filters .filterSection {
+    padding: 40px;
+}
+
+.products .filters .filterSection .select {
+    width: 100%;
+}
+
+.products .filters .filterSection .select>div {
+    padding-bottom: 15px;
+    padding-left: 0px !important;
+    border-bottom: 1px solid #999 !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+.products .filters .filterSection .select>div:hover,
+.products .filters .filterSection .select>div:focus {
+    box-shadow: none !important;
+}
+
+.products .filters .filterSection .select span,
+.products .filters .sortSection .sortSelect span {
+    color: black !important;
+    font-size: 17px;
+}
+
+.products .filters .filterSection .select span:last-of-type {
+    margin-top: -11px !important;
+}

@@ -1,0 +1,8 @@
+.footer section {
+    background-color: var(--main-bg-color);
+}
+
+.footer button {
+    background-color: var(--main-bg-dark-color);
+    color: white !important;
+}

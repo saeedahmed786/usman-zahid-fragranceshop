@@ -1,0 +1,125 @@
+.Navbar {
+    padding: 0px 36px;
+    /* mix-blend-mode: difference; */
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--main-bg-color);
+}
+
+.Navbar>div.upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Navbar .logo a {
+    font-size: 33px !important;
+    font-weight: bold;
+    color: white;
+}
+
+
+.Navbar .left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.right .search>span {
+    width: 400px;
+}
+
+.right .search>span input {
+    height: 45px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.right .search>span button {
+    height: 45px;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    width: 40px;
+    color: white !important;
+}
+
+.right a {
+    color: white;
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.right a:hover {
+    background-color: var(--main-hover-color);
+}
+
+.Dropdowns {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    /* margin-top: 32px; */
+}
+
+.signupBtn a {
+    background-color: #25275f !important;
+    padding: 8px 14px;
+    color: white;
+    font-weight: 500;
+    border-radius: 20px;
+    border-radius: 20px;
+}
+
+.Navbar .mobileMenu {
+    display: none;
+    text-align: right;
+}
+
+
+.Navbar .badge sup {
+    background-color: var(--main-bg-color) !important;
+    border: none;
+    left: 4px;
+}
+
+@media (max-width:767px) {
+    .Navbar {
+        padding: 10px !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Navbar .rightDesktop {
+        display: none;
+    }
+
+    .Navbar a {
+        color: black !important;
+        /* background-color: transparent !important; */
+    }
+
+    .logo {
+        max-width: 220px;
+    }
+
+    .loginRegBtn {
+        display: none !important;
+    }
+
+    .Navbar .Dropdowns {
+        display: none;
+    }
+
+    .Navbar .mobileMenu {
+        display: block;
+        margin-top: -10px;
+    }
+}

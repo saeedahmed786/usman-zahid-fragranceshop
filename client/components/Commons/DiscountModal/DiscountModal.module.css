@@ -1,0 +1,33 @@
+.DiscountModal {
+    color: white;
+}
+
+.DiscountModal {
+    width: 100% !important;
+    max-width: 800px;
+}
+
+.DiscountModal .inner {
+    display: flex;
+    gap: 23px;
+    align-items: center;
+}
+
+.DiscountModal img {
+    object-fit: cover;
+    width: 100% !important;
+    max-width: 400px;
+    height: 400px !important;
+    object-fit: cover;
+}
+
+.DiscountModal h2 {
+    color: black;
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.DiscountModal p {
+    color: black;
+    margin-top: 10px;
+}

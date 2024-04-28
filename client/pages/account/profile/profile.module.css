@@ -1,0 +1,23 @@
+.profile input {
+    height: 54px !important;
+    margin-top: -8px !important;
+}
+
+.profile label {
+    font-size: 21px !important;
+    color: var(--text-secondary-color) !important;
+    margin-bottom: 4px !important;
+}
+
+.profile .Select {
+    height: 54px !important;
+}
+
+.profile .DatePicker {
+    height: 54px !important;
+}
+
+.profile .DatePicker input {
+    height: auto !important;
+    margin-top: 1px !important;
+}
