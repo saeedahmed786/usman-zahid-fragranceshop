@@ -47,6 +47,10 @@ html {
   width: 100%;
 }
 
+.ant-popconfirm-buttons .ant-btn-primary {
+  width: auto !important;
+}
+
 .swiper-pagination {
   position: relative !important;
 }
@@ -72,4 +76,8 @@ html {
 .swiper-button-next::after {
   font-size: 21px !important;
   font-weight: bold !important;
+}
+
+.adminOrderProducts th {
+  padding: 32px;
 }

@@ -1,0 +1,26 @@
+.dashboard .dashboxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.dashboard .dashboxes .box {
+    width: 100%;
+    max-width: 200px;
+    padding: 56px 10px;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.dashboard .dashboxes .box h2 {
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+}
+
+.dashboard .dashboxes .box h3 {
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+}

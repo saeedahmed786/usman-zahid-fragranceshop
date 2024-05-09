@@ -9,7 +9,6 @@ const cartRoutes = require('./routes/cartRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const discountRoutes = require('./routes/discountRoutes');
 const mongoose = require('mongoose');
-const stripe = require('stripe')(config.stripe_secret);
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -32,7 +31,7 @@ app.use('/api/discounts', discountRoutes);
 
 /******************************************  MongoDb Connection  ********************************************/
 
-mongoose.connect(config.mongoURI, {
+mongoose.connect(config.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('MongoDb Connected')).catch(err => console.log(err));
@@ -45,21 +44,5 @@ if (process.env.NODE_ENV === 'production') {
 
     });
 }
-
-
-app.post("/create-payment-intent", async (req, res) => {
-    const { totalPrice } = req.body;
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: parseInt(totalPrice) * 100,
-        currency: "usd",
-        automatic_payment_methods: {
-            enabled: true,
-        },
-    });
-
-    res.send({
-        clientSecret: paymentIntent.client_secret,
-    });
-});
 
 app.listen(process.env.PORT || 8000, () => console.log('Listening to port 8000'));

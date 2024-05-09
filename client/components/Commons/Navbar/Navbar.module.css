@@ -32,24 +32,6 @@
     gap: 32px;
 }
 
-.right .search>span {
-    width: 400px;
-}
-
-.right .search>span input {
-    height: 45px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.right .search>span button {
-    height: 45px;
-    border-top-right-radius: 20px !important;
-    border-bottom-right-radius: 20px !important;
-    width: 40px;
-    color: white !important;
-}
-
 .right a {
     color: white;
     font-size: 17px;

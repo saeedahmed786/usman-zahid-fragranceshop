@@ -98,31 +98,13 @@ exports.getProductById = async (req, res) => {
   }
 }
 
-exports.getProductByMultipleFilters = async (req, res) => {
+exports.searchProducts = async (req, res) => {
   try {
-    console.log(req.body);
-    let query = {};
-
-    if (req.body.query) {
-      query.title = { $regex: `.*${req.body.query}.*`, $options: 'i' };
-    }
-    if (req.body.subject) {
-      query.subject = req.body.subject;
-    }
-    if (req.body.color) {
-      query.color = req.body.color;
-    }
-    if (req.body.tags) {
-      query.style = req.body.tags;
-    }
-
-    const findProduct = await Product.find(query)
-      .limit(20)
-      .populate('seller')
+    const findProducts = await Product.find({ title: { $regex: new RegExp(req.body.title, 'i') } })
+      .populate('mainCategory subCategory')
       .exec();
-
-    if (findProduct && findProduct.length > 0) {
-      res.status(200).json(findProduct);
+    if (findProducts) {
+      res.status(200).json(findProducts);
     } else {
       res.status(404).json({ errorMessage: 'No products found' });
     }

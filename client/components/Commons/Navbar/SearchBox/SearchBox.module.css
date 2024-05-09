@@ -1,0 +1,54 @@
+.SearchBox {
+    width: 400px;
+    position: relative;
+}
+
+.SearchBox .search>span {
+    width: 100%;
+}
+
+.SearchBox .search>span input {
+    height: 45px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.SearchBox .search>span button {
+    height: 45px;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    width: 40px;
+    color: white !important;
+}
+
+.SearchBox .resultsContainer {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.SearchBox .resultsContainer h1 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.SearchBox .resultsContainer .product {
+    font-size: 17px;
+    padding: 6px;
+    color: black;
+    display: block;
+}
+
+.SearchBox .resultsContainer .product:hover {
+    color: white;
+    padding: 6px;
+}
+
+.SearchBox .resultsContainer button {
+    float: right;
+}

@@ -3,15 +3,16 @@ import styles from './Navbar.module.css'
 import Link from 'next/link'
 import { logout } from '../Auth/auth'
 import { LockOutlined, LogoutOutlined, MenuOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
-import { Badge, Drawer, Input } from 'antd'
+import { Badge, Drawer } from 'antd'
 import LogoComp from '../LogoComp/LogoComp'
 import { useCart } from '@/context'
-const { Search } = Input;
+import SearchBox from './SearchBox/SearchBox'
 
 export const Navbar = () => {
   const { cart } = useCart();
   const [user, setUser] = useState({});
   const [open, setOpen] = useState(false);
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -38,15 +39,13 @@ export const Navbar = () => {
           </div>
         </div>
         <div className={`${styles.right} ${styles.rightDesktop}`}>
-          <div>
-            <Search placeholder='Search here...' className={styles.search} />
-          </div>
+          <SearchBox />
           {
             user && user?.email ?
               <div className={'flex items-center gap-3 ' + styles.loginRegBtn}>
                 {
                   user?.role === 1 &&
-                  <Link href="/admin" className='text-center'> <LockOutlined /> < br /> <span>Dashboard</span></Link>
+                  <Link href="/admin/dashboard" className='text-center'> <LockOutlined /> < br /> <span>Dashboard</span></Link>
                 }
                 <Link href="/account/profile" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
                 <Link href="/cart" className='text-center'>
@@ -69,15 +68,13 @@ export const Navbar = () => {
       </div>
       <Drawer title={<div className='flex justify-end items-center gap-2'><UserOutlined />{user && <span>Hi !,{user?.firstName}</span>}</div>} width={300} placement="right" onClose={onClose} open={open}>
         <div className={styles.right}>
-          <div>
-            <Search placeholder='Search here...' className={styles.search} />
-          </div>
+          <SearchBox />
           {
             user ?
               <div className={'flex items-center gap-3 ' + styles.loginRegBtn}>
                 {
                   user?.role === 1 &&
-                  <Link href="/admin" className='text-center'> <LockOutlined /> < br /> <span>Dashboard</span></Link>
+                  <Link href="/admin/dashboard" className='text-center'> <LockOutlined /> < br /> <span>Dashboard</span></Link>
                 }
                 <Link href="/profile" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
                 <Link href="/cart" className='text-center'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { EditOutlined, GroupOutlined, HomeOutlined, LogoutOutlined, PlusOutlined, UsergroupAddOutlined, UserOutlined } from '@ant-design/icons'
+import { EditOutlined, GroupOutlined, HomeOutlined, LogoutOutlined, PlusOutlined, ShoppingFilled, UsergroupAddOutlined, UserOutlined } from '@ant-design/icons'
 import { IoDocument } from 'react-icons/io5'
 import { logout } from '@/components/Commons/Auth/Auth'
 
@@ -13,8 +13,8 @@ const AdminSidebar = () => {
             <div>
                 <div className='mt-8 relative'>
                     <div className='mb-6'>
-                        <Link href="/admin">
-                            <button className={`${router.pathname === "/admin" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
+                        <Link href="/admin/dashboard">
+                            <button className={`${router.pathname === "/admin/dashboard" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
                                 <HomeOutlined />
                                 <span>Dashboard</span>
                             </button>
@@ -41,6 +41,14 @@ const AdminSidebar = () => {
                             <button className={`${router.pathname === "/admin/users" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
                                 <UsergroupAddOutlined />
                                 <span>Users</span>
+                            </button>
+                        </Link>
+                    </div>
+                    <div className='mb-6'>
+                        <Link href="/admin/orders">
+                            <button className={`${router.pathname === "/admin/orders" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
+                                <ShoppingFilled />
+                                <span>Orders</span>
                             </button>
                         </Link>
                     </div>

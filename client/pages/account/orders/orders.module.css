@@ -1,0 +1,7 @@
+.orders .headRow td {
+    background-color: var(--main-bg-color);
+    padding: 10px 19px;
+    width: max-content;
+    color: white;
+    max-width: 200px;
+}

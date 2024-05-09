@@ -78,11 +78,11 @@ const CartPage = () => {
             <h3>Order Details:</h3>
             <div className={styles.orderDetailItem}>
               <h5>Product Total</h5>
-              <h5>£{cart?.reduce((a, b) => a + b?.price, 0)}</h5>
+              <h5>£{cart?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0)}</h5>
             </div>
             <div className={styles.orderDetailItem}>
               <h5>Order Total <br /> <span>(excluding delivery)</span> </h5>
-              <h5>£{cart?.reduce((a, b) => a + b?.price, 0)}</h5>
+              <h5>£{cart?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0)}</h5>
             </div>
             <div>
               <ButtonComp disabled={cart?.length === 0} text="SECURE CHECKOUT" onClick={() => router.push("/checkout")} />

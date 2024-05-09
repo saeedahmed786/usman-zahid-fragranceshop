@@ -3,25 +3,26 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
     user: {
         type: Object,
-        default: {}
+        required: true
     },
     userId: {
         type: String,
+        required: true
     },
-    data: {
+    address: {
+        type: Object,
+    },
+    paymentData: {
         type: Object,
         default: {}
     },
     products: {
         type: Array,
+        required: true
     },
     status: {
         type: String,
         default: "1"
-    },
-    tipAmount: {
-        type: String,
-        default: ''
     },
     discount: {
         type: String,
@@ -33,22 +34,15 @@ const orderSchema = new mongoose.Schema({
     },
     totalPrice: {
         type: String,
-        default: ''
+        required: true
     },
     placed: {
         type: String,
-        default: ''
+        required: true
     },
     statusUpdateTime: {
         type: String,
         default: "---"
-    },
-    grabbed: {
-        type: mongoose.Schema.Types.ObjectId
-    },
-    returned: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
     },
     notes: {
         type: Array,

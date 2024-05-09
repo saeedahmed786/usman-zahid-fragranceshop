@@ -10,51 +10,26 @@
     /* margin-bottom: 23px; */
 }
 
-.checkout .item {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
+.checkout h2 {
+    font-size: 36px;
+    font-weight: 500 !important;
+    /* margin-bottom: 23px; */
 }
 
-
-.checkout .item .crtimg img {
-    width: 100px;
-    height: 100px;
+.checkout form input {
+    border-radius: 8px !important;
+    background: #FFF !important;
+    padding: 0px 13px;
+    padding-left: 20px !important;
+    height: 48px;
 }
 
-.checkout .item h2 {
-    font-size: 23px;
+.checkout label {
+    font-size: 21px !important;
 }
 
-.checkout .item h3 {
-    font-size: 21px;
-    color: var(--text-secondary-color);
-    font-weight: 300;
-    max-width: 200px;
-}
-
-.checkout .item .qtyContainer {
-    display: flex;
-    gap: 10px;
-}
-
-.checkout .item .qtyContainer h4 {
-    font-size: 21px;
-    color: var(--text-secondary-color);
-    font-weight: 600;
-}
-
-
-.checkout .item .checkoutEnd {
-    text-align: end;
-}
-
-.checkout .item .checkoutEnd h6 {
-    font-size: 21px;
-    color: var(--text-secondary-color);
-    font-weight: 400;
+.auth .form>div {
+    margin-bottom: 24px;
 }
 
 .checkout .right {
@@ -97,60 +72,6 @@
     font-size: 19px;
     color: var(--text-secondary-color);
     font-weight: 400;
-}
-
-@media (max-width:525px) {
-    .crtimg {
-        flex-wrap: wrap;
-    }
-
-    .checkout .checkoutBottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .checkout .checkoutBottom .space {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 23px !important;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .checkout .checkoutBottom .space h6 {
-        margin-bottom: 0px;
-    }
-
-    .checkout .checkoutBottom .rem {
-        margin-top: 0px !important;
-        width: 200px;
-    }
-
-    .checkout .checkout-text {
-        width: 100%;
-        padding-left: 0px !important;
-        margin-top: 23px;
-    }
-
-    .checkout .checkout-text button {
-        margin-bottom: 10px;
-    }
-
-    .checkout .crt-r button {
-        width: 100% !important;
-        margin-top: 15px;
-    }
-
-    .checkout .crtimg {
-        padding: 10px;
-    }
-
-    .checkout .crtimg div:first-of-type {
-        width: 100%;
-    }
 }
 
 @media (max-width:925px) {

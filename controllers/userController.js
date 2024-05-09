@@ -76,7 +76,7 @@ exports.Login = async (req, res) => {
                         role: findUser.role
                     }
                 }
-                jwt.sign(payload, config.jwtSecret, (err, token) => {
+                jwt.sign(payload, config.JWT_SECRET, (err, token) => {
                     if (err) res.status(400).json({ errorMessage: 'Jwt Error' })
                     else {
                         delete findUser["password"];
@@ -118,7 +118,7 @@ exports.adminLogin = async (req, res) => {
                         role: findUser.role
                     }
                 }
-                jwt.sign(payload, config.jwtSecret, (err, token) => {
+                jwt.sign(payload, config.JWT_SECRET, (err, token) => {
                     if (err) res.status(400).json({ errorMessage: 'Jwt Error' })
 
                     const {

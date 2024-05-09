@@ -1,4 +1,4 @@
-import { isAuthenticated, setAuthentication } from '@/components/Commons/Auth/Auth';
+import { isAuthenticated } from '@/components/Commons/Auth/Auth';
 import { AccountLayout } from '@/components/Layouts/AccountLayout/AccountLayout'
 import { DatePicker, Form, Input, Select } from 'antd';
 import axios from 'axios';
