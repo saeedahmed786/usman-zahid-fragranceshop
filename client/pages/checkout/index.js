@@ -106,7 +106,7 @@ const CheckoutPage = () => {
       <h1 className={styles.title}>Checkout</h1>
       <Row gutter={[23, 23]}>
         <Col xs={24} md={17}>
-          <div className="p-[40px]" style={{ maxWidth: 800 }}>
+          <div className="p-[17px] md:p-[40px]" style={{ maxWidth: 800 }}>
             <div>
               <h2 className="mb-8">Address Details: </h2>
               <Form
@@ -233,7 +233,7 @@ const CheckoutPage = () => {
           </div>
         </Col>
         <Col xs={24} md={7} className={styles.right}>
-          <div className="p-[40px]">
+          <div className="p-[17px] md:p-[40px] mb-10 md:mb-0">
             <div className={styles.promotionCode}>
               <h5>Promotion Code</h5>
               <Search

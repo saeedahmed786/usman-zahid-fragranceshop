@@ -87,7 +87,7 @@ exports.paymentController = async (req, res) => {
     try {
         const { token } = req.body;
         stripe.charges.create({
-            description: 'Buying Fragrance Shop Product',
+            description: 'Buying My Shop Product',
             source: token.id,
             currency: 'USD',
             amount: parseInt(10 * 100),

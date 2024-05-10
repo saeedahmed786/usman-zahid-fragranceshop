@@ -27,6 +27,7 @@ const Header = () => {
         pagination={{
           clickable: true,
         }}
+        className={styles.swiper}
         modules={[Pagination, Navigation]}
       >
         <SwiperSlide className={styles.swiperSlide}>

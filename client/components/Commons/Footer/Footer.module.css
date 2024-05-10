@@ -6,3 +6,9 @@
     background-color: var(--main-bg-dark-color);
     color: white !important;
 }
+
+@media (max-width: 700px) {
+    .footer section {
+        padding: 23px;
+    }
+}

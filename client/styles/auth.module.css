@@ -169,8 +169,4 @@
     }
 }
 
-@media (max-width: 600px) {
-    .auth>div {
-        display: flex !important;
-    }
-}
+@media (max-width: 600px) {}

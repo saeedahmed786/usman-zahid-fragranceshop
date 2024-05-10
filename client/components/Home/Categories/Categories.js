@@ -21,8 +21,8 @@ const Categories = ({ categories }) => {
         modules={[Navigation]}
         breakpoints={{
           640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
           768: {
             slidesPerView: 4,

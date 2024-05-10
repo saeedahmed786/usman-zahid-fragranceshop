@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Mail from "../public/mail.svg"
 import styles from '../styles/auth.module.css';
 import Link from 'next/link';
-import AuthHeader from '@/components/Auth/AuthHeader';
 import { ErrorAlert, SuccessAlert } from '@/components/Commons/Messages/Messages';
 import axios from 'axios';
 import { isAuthenticated } from '@/components/Commons/Auth/Auth';

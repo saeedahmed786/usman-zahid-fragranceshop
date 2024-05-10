@@ -296,7 +296,7 @@ exports.resetPasswordLink = async (req, res) => {
                     if (result) {
                         let url = '';
                         if (process.env.NODE_ENV === 'production') {
-                            url = `https://Fragrance Shop.com/reset-password/${token}` // The url of the domain on which you are hosting your frontend in production mode to serve the reset-password link page by sending this link to the email
+                            url = `https://My Shop.com/reset-password/${token}` // The url of the domain on which you are hosting your frontend in production mode to serve the reset-password link page by sending this link to the email
                         } else {
                             url = `http://localhost:3000/reset-password/${token}`  // The url of the frontend in developement mode to serve the reset-password link page on the frontend by sending this link to the email
                         }

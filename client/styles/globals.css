@@ -20,6 +20,10 @@ html {
   overflow-x: hidden !important;
 }
 
+h1 {
+  line-height: 100% !important;
+}
+
 .ant-checkbox-inner {
   background-color: var(--main-bg-color) !important;
 }
@@ -80,4 +84,8 @@ html {
 
 .adminOrderProducts th {
   padding: 32px;
+}
+
+.table-container {
+  overflow-x: auto !important;
 }

@@ -105,7 +105,7 @@ const ProductPage = () => {
                         </Carousel>
                     </Col>
                     <Col xs={24} md={12} lg={12} className={styles.right}>
-                        <div className='ml-3'>
+                        <div className='p-[17px] md:p-0 md:ml-3'>
                             <h1>
                                 {product.title}
                             </h1>
@@ -143,7 +143,7 @@ const ProductPage = () => {
                         {
                             relatedProducts?.map((product, index) => {
                                 return (
-                                    <Col xs={24} md={8} lg={6} key={index}>
+                                    <Col xs={12} md={8} lg={6} key={index}>
                                         <Link href={`/product/${product?._id}`}>
                                             <MainProductCard product={product} />
                                         </Link>

@@ -157,7 +157,7 @@ const Products = () => {
                     {
                         productsArray?.map((product, index) => {
                             return (
-                                <Col xs={24} md={8} lg={6} key={index}>
+                                <Col xs={12} md={8} lg={6} key={index}>
                                     <Link href={`/product/${product?._id}`}>
                                         <MainProductCard product={product} />
                                     </Link>

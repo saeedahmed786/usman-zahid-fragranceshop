@@ -61,7 +61,7 @@ const Template = (
                 </div>    
                 <footer>
                 <div class="bottom">
-                    <h2>Fragrance Shop</h2>
+                    <h2>My Shop</h2>
                 </div>
             </footer>
             </div>

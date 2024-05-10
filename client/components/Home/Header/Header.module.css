@@ -30,3 +30,13 @@ header .swiperSlide h2 {
 header .swiperSlide p {
     font-size: 16px;
 }
+
+@media (max-width: 700px) {
+
+    header .swiper,
+    header .swiper .swiperSlide,
+    header .swiperSlide img {
+        height: 400px;
+        /* object-fit: cover; */
+    }
+}

@@ -12,7 +12,7 @@ const Footer = () => {
         <footer className={styles.footer}>
             <section className={"py-[40px]"}>
                 <div className={"mx-auto lg:container "}>
-                    <Row className={" border-b border-[#333B42] mb-[44px] pb-[40px]"}>
+                    <Row gutter={[23, 23]} className={"border-b border-[#333B42] mb-[44px] pb-[40px]"}>
                         <Col xs={24} md={8} lg={6} className={"flex flex-col items-start gap-5 pr-6"}>
                             <Link href="/">
                                 <LogoComp />

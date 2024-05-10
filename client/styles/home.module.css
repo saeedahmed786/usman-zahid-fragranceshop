@@ -39,3 +39,18 @@
 .home .categories a div img {
     height: 300px !important;
 }
+
+@media (max-width: 700px) {
+    .home .categories {
+        flex-wrap: wrap;
+    }
+
+    .home .categories a div img {
+        height: 260px !important;
+    }
+
+    .home .homeFooter {
+        text-align: center;
+        padding: 23px;
+    }
+}

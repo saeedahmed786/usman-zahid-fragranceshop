@@ -140,7 +140,7 @@ const Admin = () => {
                     </div>
                 </div>
                 <h1 className='text-[43px] font-bold'>Orders</h1>
-                <div className='flex justify-end gap-4 my-4'>
+                <div className={'flex justify-end gap-4 my-4 ' + styles.buttons}>
                     <ButtonComp text="Previous Month" onClick={handlePreviousMonth} />
                     <ButtonComp text="Next Month" disabled={isNextMonthFuture} onClick={handleNextMonth} />
                     {/* <button disabled={isNextMonthFuture} onClick={handleNextMonth}>Next Month</button> */}

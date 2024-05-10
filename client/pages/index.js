@@ -66,7 +66,7 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <div className="pt-14">
+      <div className="pt-0 md:pt-14">
         <Header />
       </div>
       <div className="m-[30px]">
@@ -98,7 +98,7 @@ const Home = () => {
           </Link>
         </Col>
       </Row>
-      <div className={"sm:m-[30px]"}>
+      <div className={"m-[15px] sm:m-[30px]"}>
         <h1 className={styles.title}>Best Sellers</h1>
         <div className={styles.Products}>
           <Swiper
@@ -141,10 +141,10 @@ const Home = () => {
         <Products productsList={productsArray} />
       </div>
       <div className={styles.homeFooter}>
-        <h1 className={styles.title}>About the Fragrance Shop</h1>
-        <p>Welcome to The Fragrance Shop, your ultimate destination for high-quality perfumes, aftershaves and colognes. We offer a vast selection of fragrances for men and women, featuring top brands such as Dior, Versace, Rabanne, and more. Our commitment to quality extends beyond our fragrances to our exceptional customer service. Our friendly and knowledgeable team is always on hand to answer your questions and provide advice on choosing the right product. We also have amazing fragrance offers so you can enjoy high-quality cheap perfume or aftershave from your favourite brands. We also offer My TFS Membership which gives you 20% off and free express delivery*.</p>
+        <h1 className={styles.title}>About the My Shop</h1>
+        <p>Welcome to The My Shop, your ultimate destination for high-quality perfumes, aftershaves and colognes. We offer a vast selection of fragrances for men and women, featuring top brands such as Dior, Versace, Rabanne, and more. Our commitment to quality extends beyond our fragrances to our exceptional customer service. Our friendly and knowledgeable team is always on hand to answer your questions and provide advice on choosing the right product. We also have amazing fragrance offers so you can enjoy high-quality cheap perfume or aftershave from your favourite brands. We also offer My TFS Membership which gives you 20% off and free express delivery*.</p>
         <p>You can discover the perfect perfume or aftershave is an effortless journey with Fragrance Match, our innovative online quiz designed to help you pinpoint your ideal scent. Whether you lean towards the crisp notes of fresh florals or the allure of something more exotic and sensual, you will be able to find something you love in our large selection of perfumes, aftershaves and more from top designer brands. You can even spread the cost with our aftershaves and perfumes on finance, splitting the cost over intrest-free monthly payments*.</p>
-        <p>Shop perfume, aftershave and more with confidence at The Fragrance Shop.</p>
+        <p>Shop perfume, aftershave and more with confidence at The My Shop.</p>
       </div>
     </div>
   );

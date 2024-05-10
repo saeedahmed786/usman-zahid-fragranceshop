@@ -96,3 +96,14 @@
     text-align: center;
     margin-bottom: 28px;
 }
+
+@media (max-width: 700px) {
+    .product>div {
+        margin: 0px auto;
+    }
+
+    .product .description,
+    .product .relatedProducts {
+        padding: 17px;
+    }
+}

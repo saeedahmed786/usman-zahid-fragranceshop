@@ -3,5 +3,5 @@
     padding: 10px 19px;
     width: max-content;
     color: white;
-    max-width: 200px;
+    min-width: 200px;
 }

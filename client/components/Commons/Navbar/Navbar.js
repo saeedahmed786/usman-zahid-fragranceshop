@@ -7,8 +7,10 @@ import { Badge, Drawer } from 'antd'
 import LogoComp from '../LogoComp/LogoComp'
 import { useCart } from '@/context'
 import SearchBox from './SearchBox/SearchBox'
+import { useRouter } from 'next/router'
 
 export const Navbar = () => {
+  const router = useRouter();
   const { cart } = useCart();
   const [user, setUser] = useState({});
   const [open, setOpen] = useState(false);
@@ -27,6 +29,15 @@ export const Navbar = () => {
 
     }
   }, [])
+
+  useEffect(() => {
+    onClose();
+
+    return () => {
+
+    }
+  }, [router.pathname]);
+
 
   return (
     <nav className={styles.Navbar}>
@@ -66,27 +77,27 @@ export const Navbar = () => {
       <div className={styles.mobileMenu}>
         <button onClick={showDrawer} className="text-white"><MenuOutlined className='text-[19px]' /></button>
       </div>
-      <Drawer title={<div className='flex justify-end items-center gap-2'><UserOutlined />{user && <span>Hi !,{user?.firstName}</span>}</div>} width={300} placement="right" onClose={onClose} open={open}>
+      <Drawer className={styles.drawer} title={<div className='flex justify-end items-center gap-2'><UserOutlined />{user && <span>Hi !,{user?.firstName}</span>}</div>} width={300} placement="right" onClose={onClose} open={open}>
         <div className={styles.right}>
           <SearchBox />
           {
             user ?
-              <div className={'flex items-center gap-3 ' + styles.loginRegBtn}>
+              <div className='mt-4'>
                 {
                   user?.role === 1 &&
                   <Link href="/admin/dashboard" className='text-center'> <LockOutlined /> < br /> <span>Dashboard</span></Link>
                 }
-                <Link href="/profile" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
+                <Link href="/account/profile" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
                 <Link href="/cart" className='text-center'>
                   <Badge count={5} className={styles.badge}>
-                    <ShoppingCartOutlined className='text-[19px] text-white' />
+                    <ShoppingCartOutlined className='text-[19px]' />
                   </Badge>
                   < br />
                   <span>My Cart</span></Link>
                 <a href="/login" className='text-center' onClick={logout}> <LogoutOutlined /> < br /> <span>Logout</span></a>
               </div>
               :
-              <div className={`flex items-center gap-2 md:gap-10 text-white`}>
+              <div className={`flex items-center gap-2 md:gap-10`}>
                 <Link href="/login" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
               </div>
           }

@@ -104,4 +104,30 @@
         display: block;
         margin-top: -10px;
     }
+
+    .drawer .right {
+        display: block;
+    }
+
+    .drawer .right>div:first-of-type {
+        width: 100% !important;
+    }
+
+    .drawer .right a {
+        color: #25275f;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 5px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .drawer .right a:hover {
+        color: white;
+    }
+
+    .drawer .right a:hover svg {
+        color: white !important;
+    }
 }

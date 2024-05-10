@@ -89,7 +89,7 @@ export const OrderList = (props) => {
                                         </td>
                                         <td>
                                             Status: &nbsp;
-                                            <span className={`font-bold ${order?.state !== 0 ? "text-[#083652]" : "text-[red]"}`}>
+                                            <span className={`font-bold ${order?.status !== "0" ? "text-[#083652]" : "text-[red]"}`}>
                                                 {
 
                                                     order?.status === '0' ?

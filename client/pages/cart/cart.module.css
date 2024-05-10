@@ -49,9 +49,10 @@
 
 .cart .item .cartEnd {
     text-align: end;
+    margin-top: 6px;
 }
 
-.cart .item .cartEnd h6 {
+.cart .item h6 {
     font-size: 21px;
     color: var(--text-secondary-color);
     font-weight: 400;
@@ -120,62 +121,20 @@
     margin-bottom: 15px;
 }
 
-@media (max-width:525px) {
-    .crtimg {
-        flex-wrap: wrap;
-    }
-
-    .cart .cartBottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .cart .cartBottom .space {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 23px !important;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .cart .cartBottom .space h6 {
-        margin-bottom: 0px;
-    }
-
-    .cart .cartBottom .rem {
-        margin-top: 0px !important;
-        width: 200px;
-    }
-
-    .cart .cart-text {
-        width: 100%;
-        padding-left: 0px !important;
-        margin-top: 23px;
-    }
-
-    .cart .cart-text button {
-        margin-bottom: 10px;
-    }
-
-    .cart .crt-r button {
-        width: 100% !important;
-        margin-top: 15px;
-    }
-
-    .cart .crtimg {
-        padding: 10px;
-    }
-
-    .cart .crtimg div:first-of-type {
-        width: 100%;
-    }
-}
-
-@media (max-width:925px) {
+@media (max-width:700px) {
     .cart {
-        padding: 20px;
+        padding: 17px !important;
+    }
+
+    .cart .title {
+        padding: 0px !important;
+        padding-bottom: 15px !important;
+    }
+
+    .cart .item {
+        gap: 23px;
+        justify-content: start;
+        border: 1px solid lightgray;
+        padding: 10px;
     }
 }

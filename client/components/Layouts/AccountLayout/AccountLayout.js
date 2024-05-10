@@ -7,18 +7,18 @@ export const AccountLayout = (props) => {
   const user = isAuthenticated();
 
   return (
-    <div>
+    <div className='p-[17px] md:p-[40px]'>
       <>
-        <div className='ml-[40px] mt-[40px]'>
+        <div>
           <h1 className='text-[47px] font-bold'>My Account</h1>
           <p className='text-[28px] font-[500]'>{user?.firstName} {user?.lastName}</p>
         </div>
-        <Row className='ml-[40px] mt-[40px]' style={{ borderTop: '1px solid #d4d5d9' }}>
-          <Col xs={6}>
+        <Row style={{ borderTop: '1px solid #d4d5d9' }}>
+          <Col xs={24} md={6}>
             <AccoutSidebar />
           </Col>
-          <Col xs={18}>
-            <div className='p-5'>
+          <Col xs={24} md={18}>
+            <div className='md:p-5'>
               {props.children}
             </div>
           </Col>

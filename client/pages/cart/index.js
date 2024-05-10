@@ -21,7 +21,7 @@ const CartPage = () => {
       <h1 className={styles.title}>My Cart</h1>
       <Row gutter={[23, 23]}>
         <Col xs={24} md={17}>
-          <div className="p-[40px]">
+          <div className="p-[0px] pt-[17px] md:p-[40px]">
             {
               cart?.length > 0 ?
                 cart?.map((prod, index) => {
@@ -30,7 +30,7 @@ const CartPage = () => {
                       <div className={styles.crtimg}>
                         <Image src={prod?.pictures[0]?.response?.url} width={100} height={100} alt={prod?.title} />
                       </div>
-                      <div className="px-4">
+                      <div className="md:px-4">
                         <h2>
                           {prod?.title}
                         </h2>
@@ -45,9 +45,11 @@ const CartPage = () => {
                           <InputNumber min={1} max={100000} value={prod?.qtyToShop} onChange={(value) => saveQtyToDb(value, prod)} />
                         </div>
                       </div>
+                      <div>
+                        <h6>${parseInt(prod?.price) * parseInt(prod?.qtyToShop)}</h6>
+                      </div>
                       <div className={styles.cartEnd}>
                         <DeleteFilled className="text-[19px]" onClick={() => removeFromCart(prod?._id)} />
-                        <h6>${parseInt(prod?.price) * parseInt(prod?.qtyToShop)}</h6>
                       </div>
                     </div>
                   )
@@ -65,7 +67,7 @@ const CartPage = () => {
           </div>
         </Col>
         <Col xs={24} md={7} className={styles.right}>
-          <div className="p-[40px]">
+          <div className="md:p-[40px] mb-10 md:mb-0">
             <div className={styles.promotionCode}>
               <h5>Promotion Code</h5>
               <Search
