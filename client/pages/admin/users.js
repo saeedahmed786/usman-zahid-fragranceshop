@@ -1,19 +1,17 @@
-import { Button, Table } from 'antd'
+import { Table } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { DeleteOutlined, EditOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons'
+import { DeleteOutlined, RightOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import moment from 'moment'
 import { ErrorAlert, SuccessAlert } from '@/components/Commons/Messages/Messages'
 import DeleteModal from '@/components/DeleteModal'
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
-import { isAuthenticated } from '@/components/Commons/Auth/Auth'
 
 const Users = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
-    const [userAuth, setUserAuth] = useState({});
     const [current, setCurrent] = useState(1);
     const [totalUsers, setTotalUsers] = useState();
 
@@ -37,7 +35,6 @@ const Users = () => {
     }
 
     useEffect(() => {
-        setUserAuth(isAuthenticated());
         getAllUsers(current);
         return () => {
         }
@@ -139,7 +136,7 @@ const Users = () => {
                     </div>
                 </div>
                 <div className='hidden md:block bg-white'>
-                    <Table showSorterTooltip columns={columns} pagination={false} dataSource={users} />
+                    <Table loading={loading} showSorterTooltip columns={columns} pagination={false} dataSource={users} />
                 </div>
             </div>
         </AdminLayout>
