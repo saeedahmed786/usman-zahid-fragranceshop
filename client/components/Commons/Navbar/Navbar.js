@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Navbar.module.css'
 import Link from 'next/link'
-import { logout } from '../Auth/auth'
 import { LockOutlined, LogoutOutlined, MenuOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 import { Badge, Drawer } from 'antd'
 import LogoComp from '../LogoComp/LogoComp'
 import { useCart } from '@/context'
 import SearchBox from './SearchBox/SearchBox'
 import { useRouter } from 'next/router'
+import { logout } from '../Auth/Auth'
 
 export const Navbar = () => {
   const router = useRouter();
