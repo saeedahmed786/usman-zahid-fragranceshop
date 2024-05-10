@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styles from './products.module.css';
 import Loading from '@/components/Commons/Loading/Loading';
+import { ButtonComp } from '@/components/Commons/ButtonComp/ButtonComp';
 
 
 const Products = () => {
@@ -14,8 +15,8 @@ const Products = () => {
     const [productsArray, setProductsArray] = useState([]);
     const [sortValue, setSortValue] = useState("");
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState("");
-    const [priceRange, setPriceRange] = useState("");
+    const [category, setCategory] = useState();
+    const [priceRange, setPriceRange] = useState();
     const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState();
     const [current, setCurrent] = useState(1);
@@ -119,10 +120,10 @@ const Products = () => {
                 <div className={styles.filterSection}>
                     <Row gutter={[23, 23]}>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} onChange={(val) => setCategory(val)} placeholder="Brand" options={categories} />
+                            <Select className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Brand" options={categories} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
+                            <Select className={styles.select} value={priceRange} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
                                 { value: "0-10", label: "$0 - $10" },
                                 { value: "10-20", label: "$10 - $20" },
                                 { value: "20-50", label: "$20 - $50" },
@@ -137,26 +138,31 @@ const Products = () => {
                                 { value: "noe", label: "No" }
                             ]} />
                         </Col>
+                        <Col xs={8} md={8} lg={6}>
+                            <div className='max-w-[200px] pl-3'>
+                                <ButtonComp text="Reset All Filters" onClick={() => { setCategory(""); setPriceRange("") }} />
+                            </div>
+                        </Col>
                     </Row>
                 </div>
             </div>
             {
-                // loading ?
-                //     <Loading />
-                //     :
-                <Row gutter={[23, 23]} className="p-4">
-                    {
-                        productsArray?.map((product, index) => {
-                            return (
-                                <Col xs={12} md={8} lg={6} key={index}>
-                                    <Link href={`/product/${product?._id}`}>
-                                        <MainProductCard product={product} />
-                                    </Link>
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
+                loading ?
+                    <Loading />
+                    :
+                    <Row gutter={[23, 23]} className="p-4">
+                        {
+                            productsArray?.map((product, index) => {
+                                return (
+                                    <Col xs={12} md={8} lg={6} key={index}>
+                                        <Link href={`/product/${product?._id}`}>
+                                            <MainProductCard product={product} />
+                                        </Link>
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
             }
             <div className='flex justify-center my-10'>
                 <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />

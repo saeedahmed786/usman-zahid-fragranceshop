@@ -32,7 +32,7 @@ const Categories = ({ categories }) => {
             slidesPerView: 6,
             spaceBetween: 20,
           },
-        }}
+        }} 
       >
         {
           categories?.map((category, index) => {
