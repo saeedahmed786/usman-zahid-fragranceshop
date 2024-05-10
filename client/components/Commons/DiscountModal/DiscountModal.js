@@ -38,7 +38,7 @@ export const DiscountModal = ({ }) => {
       <div className={styles.inner}>
         <Image width={100} height={100} src={sale} />
         <div>
-          <h2>Exclusive Discount 20% OFF for first signing up</h2>
+          <h2>Exclusive Discount 10% OFF for first signing up</h2>
           <p>You can discover the perfect perfume or aftershave is an effortless journey with Fragrance Match, our innovative online quiz designed to help you pinpoint your ideal scent. </p>
           <div className='mt-4'>
             <label className='text-black'>Enter your email to get started</label>
