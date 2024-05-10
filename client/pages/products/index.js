@@ -54,8 +54,9 @@ const Products = () => {
 
     useEffect(() => {
         getAllSubCategories();
-        setCategory(router.query?.category)
-
+        if (router.query?.category) {
+            setCategory(router.query?.category)
+        }
         return () => {
 
         }
