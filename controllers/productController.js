@@ -100,7 +100,7 @@ exports.getProductById = async (req, res) => {
 
 exports.searchProducts = async (req, res) => {
   try {
-    const findProducts = await Product.find({ title: { $regex: new RegExp(req.body.title, 'i') } })
+    const findProducts = await Product.find({ $or: [{ title: { $regex: new RegExp(req.body.title, 'i') } }, { subTitle: { $regex: new RegExp(req.body.title, 'i') } }] })
       .populate('mainCategory subCategory')
       .exec();
     if (findProducts) {
