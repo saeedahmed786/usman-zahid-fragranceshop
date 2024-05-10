@@ -20,6 +20,9 @@
     color: black;
     margin: 6px 0px;
     font-size: 21px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .MainProductCard p {
