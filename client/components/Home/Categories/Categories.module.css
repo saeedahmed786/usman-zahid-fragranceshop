@@ -13,5 +13,5 @@
     width: 60px !important;
     height: 60px !important;
     border-radius: 50%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
