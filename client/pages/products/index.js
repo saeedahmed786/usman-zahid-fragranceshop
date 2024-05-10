@@ -15,7 +15,7 @@ const Products = () => {
     const [productsArray, setProductsArray] = useState([]);
     const [sortValue, setSortValue] = useState("");
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState(router.query.category);
     const [priceRange, setPriceRange] = useState();
     const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState();
