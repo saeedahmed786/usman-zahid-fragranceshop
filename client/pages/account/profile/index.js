@@ -153,7 +153,7 @@ const ProfilePage = () => {
                             className={'w-full ' + styles.DatePicker}
                             placeholder="Select your birthday"
                             format="DD/MM/YYYY"
-                            value={moment(birthday, "DD/MM/YYYY")}
+                            defaultValue={moment(birthday, "DD/MM/YYYY")}
                             disabledDate={(current) => current && current > moment().endOf('day')}
                             onChange={(date, dateString) => setBirthday(dateString)}
                         />
