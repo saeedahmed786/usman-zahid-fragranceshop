@@ -89,7 +89,7 @@ export const Navbar = () => {
                 }
                 <Link href="/account/profile" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
                 <Link href="/cart" className='text-center'>
-                  <Badge count={5} className={styles.badge}>
+                  <Badge count={cart?.length} className={styles.badge}>
                     <ShoppingCartOutlined className='text-[19px]' />
                   </Badge>
                   < br />
@@ -97,7 +97,7 @@ export const Navbar = () => {
                 <a href="/login" className='text-center' onClick={logout}> <LogoutOutlined /> < br /> <span>Logout</span></a>
               </div>
               :
-              <div className={`flex items-center gap-2 md:gap-10`}>
+              <div className={`flex items-center mt-6 gap-2 md:gap-10`}>
                 <Link href="/login" className='text-center'> <UserOutlined /> < br /> <span>Account</span></Link>
               </div>
           }

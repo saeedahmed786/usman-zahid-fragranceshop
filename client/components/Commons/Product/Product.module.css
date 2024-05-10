@@ -19,3 +19,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+@media (max-width: 600px) {
+    .Product img {
+        height: 260px !important;
+    }
+}

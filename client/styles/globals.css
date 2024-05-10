@@ -93,3 +93,7 @@ h1 {
 .anticon {
   cursor: pointer !important;
 }
+
+.carousel .thumbs-wrapper {
+  overflow-x: auto !important;
+}

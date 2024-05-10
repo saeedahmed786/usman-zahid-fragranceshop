@@ -142,8 +142,8 @@ const Products = () => {
                                 { value: "noe", label: "No" }
                             ]} />
                         </Col>
-                        <Col xs={8} md={8} lg={6}>
-                            <div className='max-w-[200px] pl-3'>
+                        <Col xs={24} md={8} lg={6}>
+                            <div className='md:max-w-[200px]'>
                                 <ButtonComp text="Reset All Filters" onClick={() => { setCategory(""); setPriceRange("") }} />
                             </div>
                         </Col>

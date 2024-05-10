@@ -98,7 +98,7 @@ const Home = () => {
           </Link>
         </Col>
       </Row>
-      <div className={"m-[15px] sm:m-[30px]"}>
+      <div className={"m-[30px] sm:m-[30px]"}>
         <h1 className={styles.title}>Best Sellers</h1>
         <div className={styles.Products}>
           <Swiper
