@@ -70,6 +70,7 @@ const Products = () => {
     }, [current, category, priceRange]);
 
 
+
     const sortProducts = (products, sortBy) => {
         switch (sortBy) {
             case "lth":
