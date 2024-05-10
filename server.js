@@ -9,7 +9,7 @@ const cartRoutes = require('./routes/cartRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const discountRoutes = require('./routes/discountRoutes');
 const mongoose = require('mongoose');
-const path = require('path');
+// const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
@@ -36,13 +36,12 @@ mongoose.connect(config.MONGO_URI, {
     useUnifiedTopology: true
 }).then(() => console.log('MongoDb Connected')).catch(err => console.log(err));
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('./client/build'));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static('./client/build'));
 
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-
-    });
-}
+//     app.get('/*', (req, res) => {
+//         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+//     });
+// }
 
 app.listen(process.env.PORT || 8000, () => console.log('Listening to port 8000'));

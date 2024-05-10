@@ -175,7 +175,7 @@ export const OrderList = (props) => {
 
                                                     </th>
                                                     <th>Qty:{product?.qtyToShop}</th>
-                                                    <th>£ {parseInt(product?.price * product?.qty)}</th>
+                                                    <th>£ {parseInt(product?.price * product?.qtyToShop)}</th>
                                                 </tr>
                                             )
                                         })
