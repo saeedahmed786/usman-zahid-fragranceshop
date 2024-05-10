@@ -27,7 +27,7 @@ const Home = () => {
 
   const getAllData = async (e) => {
     setLoading(true);
-    await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/0`).then(async (res) => {
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/0`, { ss: "" }).then(async (res) => {
       setLoading(false);
       if (res.status === 200) {
         setProductsArray(res.data?.products);
