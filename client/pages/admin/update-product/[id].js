@@ -1,5 +1,5 @@
 import { Button, Input, Select } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { RightOutlined } from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css';
@@ -9,9 +9,9 @@ import { ErrorAlert, SuccessAlert } from '@/components/Commons/Messages/Messages
 import Link from 'next/link';
 import DragUpload from '@/components/Commons/DragUpload/DragUpload';
 import { useRouter } from 'next/router';
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
-
+ 
 const UpdateProduct = () => {
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const router = useRouter();
     let productId = router?.query?.id;
     const [untrimmedCategories, setUntrimmedCategories] = useState([]);

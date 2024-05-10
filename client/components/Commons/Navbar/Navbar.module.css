@@ -107,7 +107,7 @@
 
     .drawer .right {
         display: block;
-    }
+    } 
 
     .drawer .right>div:first-of-type {
         width: 100% !important;
@@ -116,7 +116,7 @@
     .drawer .right a {
         color: #25275f;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         gap: 5px;
         text-align: left;

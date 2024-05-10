@@ -133,7 +133,7 @@
 
     .cart .item {
         gap: 23px;
-        justify-content: start;
+        justify-content: flex-start;
         border: 1px solid lightgray;
         padding: 10px;
     }

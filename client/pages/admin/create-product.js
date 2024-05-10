@@ -1,5 +1,5 @@
 import { Button, Input, Select } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { RightOutlined } from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css';
@@ -9,9 +9,9 @@ import Link from 'next/link';
 import DragUpload from '@/components/Commons/DragUpload/DragUpload';
 import { useRouter } from 'next/router';
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 const CreateProduct = () => {
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const router = useRouter();
     const [untrimmedCategories, setUntrimmedCategories] = useState([]);
     const [categories, setCategories] = useState([]);
