@@ -10,6 +10,7 @@ import DeleteModal from '@/components/DeleteModal'
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
 import { isAuthenticated } from '@/components/Commons/Auth/Auth'
 import Image from 'next/image'
+import Loading from '@/components/Commons/Loading/Loading'
 
 const Products = () => {
     const router = useRouter();
@@ -169,7 +170,7 @@ const Products = () => {
                     </div>
                 </div>
                 <div className='hidden md:block bg-white'>
-                    <Table showSorterTooltip columns={columns} pagination={false} dataSource={products} />
+                    <Table loading={loading} showSorterTooltip columns={columns} pagination={false} dataSource={products} />
                 </div>
                 <div className='flex justify-center my-10'>
                     <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />

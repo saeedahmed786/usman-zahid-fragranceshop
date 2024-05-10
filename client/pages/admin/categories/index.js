@@ -125,7 +125,7 @@ const Categories = () => {
           </div>
         </div>
         {/* Show categories */}
-        <Table expandable={false} columns={columns} pagination={false} dataSource={categories} />
+        <Table loading={loading} expandable={false} columns={columns} pagination={false} dataSource={categories} />
       </div>
     </AdminLayout>
   )
