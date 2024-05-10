@@ -17,6 +17,7 @@ const Categories = () => {
   const [loading, setLoading] = useState(false);
 
   const getAllCategories = async () => {
+    setLoading(true);
     await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/get`).then(res => {
       if (res.statusText === "OK") {
         setCategories(res.data);
@@ -61,7 +62,6 @@ const Categories = () => {
         ErrorAlert(res.data.errorMessage)
       }
     }).catch(err => {
-      setLoading(false);
       console.log(err)
       ErrorAlert(err?.message);
     })

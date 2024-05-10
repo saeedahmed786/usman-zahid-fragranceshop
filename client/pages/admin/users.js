@@ -16,6 +16,7 @@ const Users = () => {
     const [totalUsers, setTotalUsers] = useState();
 
     const getAllUsers = async (curr) => {
+        setLoading(true);
         await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users`, {
             headers: {
                 authorization: 'Bearer ' + localStorage.getItem("token")
@@ -54,7 +55,6 @@ const Users = () => {
                 ErrorAlert(res.data.errorMessage)
             }
         }).catch(err => {
-            setLoading(false);
             console.log(err)
             ErrorAlert(err?.message);
         })
