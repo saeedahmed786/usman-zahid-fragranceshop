@@ -1,4 +1,4 @@
-import { Button, Table } from 'antd'
+import { Button, Pagination, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
@@ -15,35 +15,33 @@ const Products = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
-    const [userAuth, setUserAuth] = useState({});
     const [current, setCurrent] = useState(1);
-    const [totalProducts, setTotalProducts] = useState();
+    const [totalCount, setTotalCount] = useState();
 
-    const getAllProducts = async (curr) => {
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${curr - 1}`, {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem("token")
+    const getAllData = async () => {
+        setLoading(true);
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { ss: "" }).then(res => {
+            setLoading(false);
+            if (res.status === 200) {
+                setProducts(res.data?.products);
+                setTotalCount(res.data.count)
             }
-        }).then(res => {
-            if (res.statusText === "OK") {
-                setProducts(res.data.products);
-                setTotalProducts(res.data.count);
-            } else {
+            else {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
-            setLoading(false);
             console.log(err)
-            ErrorAlert(err?.message);
-        })
+        });
     }
 
     useEffect(() => {
-        setUserAuth(isAuthenticated());
-        getAllProducts(current);
+        getAllData()
+
         return () => {
+
         }
-    }, []);
+    }, [current])
+
 
 
     const deleteHandler = async (id) => {
@@ -111,7 +109,7 @@ const Products = () => {
             ),
         },
         {
-            title: "Date",
+            title: "Created Date",
             dataIndex: 'createdAt',
             key: 'createdAt',
             sorter: (a, b) => a.createdAt.length - b.createdAt.length,
@@ -173,10 +171,9 @@ const Products = () => {
                 <div className='hidden md:block bg-white'>
                     <Table showSorterTooltip columns={columns} pagination={false} dataSource={products} />
                 </div>
-                {/* <div className='adminPagination bg-white p-4 flex items-center justify-between flex-wrap rounded-[16px] md:rounded-none my-1 md:my-12'>
-                    <p className='text-[#65737E] text-[12px]'>Affichage de {current * 10} sur {totalProducts}  entrées</p>
-                    <AdminPagination totalLength={totalProducts} handlePagination={(curr) => { setCurrent(curr); getAllProducts(curr) }} />
-                </div> */}
+                <div className='flex justify-center my-10'>
+                    <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />
+                </div>
             </div>
         </AdminLayout>
     )

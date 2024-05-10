@@ -1,12 +1,11 @@
 import { MainProductCard } from '@/components/Commons/MainProductCard/MainProductCard';
 import { ErrorAlert } from '@/components/Commons/Messages/Messages';
-import { Col, Row, Select } from 'antd';
+import { Col, Pagination, Row, Select } from 'antd';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styles from './products.module.css';
-import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from '@/components/Commons/Loading/Loading';
 
 
@@ -15,19 +14,19 @@ const Products = () => {
     const [productsArray, setProductsArray] = useState([]);
     const [sortValue, setSortValue] = useState("");
     const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState("");
+    const [priceRange, setPriceRange] = useState("");
     const [loading, setLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
     const [totalCount, setTotalCount] = useState();
-    const [index, setIndex] = useState(0);
+    const [current, setCurrent] = useState(1);
 
-    const getAllData = async (e) => {
+    const getAllData = async () => {
         setLoading(true);
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${index}`).then(async (res) => {
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange }).then(res => {
             setLoading(false);
             if (res.status === 200) {
-                setProductsArray((prevItems) => [...prevItems, ...res.data?.products]);
+                setProductsArray(res.data?.products);
                 setTotalCount(res.data.count)
-                res.data?.products?.length > 0 ? setHasMore(true) : setHasMore(false);
             }
             else {
                 ErrorAlert(res.data.errorMessage);
@@ -35,12 +34,11 @@ const Products = () => {
         }).catch(err => {
             console.log(err)
         });
-        setIndex((prevIndex) => prevIndex + 1);
     }
 
-    const getAllSubCategories = async (e) => {
+    const getAllSubCategories = async () => {
         setLoading(true);
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then(async (res) => {
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then((res) => {
             setLoading(false);
             if (res.status === 200) {
                 setCategories(res.data?.map(f => ({ value: f?._id, label: f?.name })));
@@ -54,13 +52,20 @@ const Products = () => {
     }
 
     useEffect(() => {
-        getAllData();
         getAllSubCategories();
 
         return () => {
 
         }
     }, []);
+
+    useEffect(() => {
+        getAllData();
+
+        return () => {
+
+        }
+    }, [current, category, priceRange]);
 
     const sortProducts = (products, sortBy) => {
         switch (sortBy) {
@@ -88,7 +93,6 @@ const Products = () => {
         }
     };
 
-
     return (
         <div className={styles.products}>
             <div className={styles.top}>
@@ -115,26 +119,16 @@ const Products = () => {
                 <div className={styles.filterSection}>
                     <Row gutter={[23, 23]}>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} placeholder="Brand" options={categories} />
+                            <Select className={styles.select} onChange={(val) => setCategory(val)} placeholder="Brand" options={categories} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} placeholder="Price" options={[
+                            <Select className={styles.select} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
                                 { value: "0-10", label: "$0 - $10" },
                                 { value: "10-20", label: "$10 - $20" },
                                 { value: "20-50", label: "$20 - $50" },
                                 { value: "50-100", label: "$50 - $100" },
                                 { value: "100-150", label: "$100 - $150" },
                                 { value: "150-200000", label: "$150>" }
-                            ]} />
-                        </Col>
-                        <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} placeholder="Size (ml)" options={[
-                                { value: "125", label: "125ml" },
-                                { value: "100", label: "100ml" },
-                                { value: "90", label: "90ml" },
-                                { value: "80", label: "80ml" },
-                                { value: "70", label: "70ml" },
-                                { value: "60", label: "60ml" }
                             ]} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
@@ -146,13 +140,10 @@ const Products = () => {
                     </Row>
                 </div>
             </div>
-            <InfiniteScroll
-                dataLength={productsArray.length}
-                className={styles.scroll}
-                next={getAllData}
-                hasMore={hasMore}
-                loader={<Loading />}
-            >
+            {
+                // loading ?
+                //     <Loading />
+                //     :
                 <Row gutter={[23, 23]} className="p-4">
                     {
                         productsArray?.map((product, index) => {
@@ -166,7 +157,10 @@ const Products = () => {
                         })
                     }
                 </Row>
-            </InfiniteScroll>
+            }
+            <div className='flex justify-center my-10'>
+                <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />
+            </div>
         </div >
     )
 }
