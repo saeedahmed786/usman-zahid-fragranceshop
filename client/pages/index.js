@@ -42,7 +42,7 @@ const Home = () => {
 
   const getAllCategories = async (e) => {
     setLoading(true);
-    await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/get`).then(async (res) => {
+    await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then(async (res) => {
       setLoading(false);
       if (res.status === 200) {
         setCategories(res.data);
