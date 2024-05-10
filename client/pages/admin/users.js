@@ -22,6 +22,7 @@ const Users = () => {
                 authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(res => {
+            setLoading(false);
             if (res.statusText === "OK") {
                 setUsers(res.data);
                 setTotalUsers(res.data.count);

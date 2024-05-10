@@ -54,6 +54,7 @@ const Products = () => {
 
     useEffect(() => {
         getAllSubCategories();
+        setCategory(router.query?.category)
 
         return () => {
 
@@ -67,6 +68,7 @@ const Products = () => {
 
         }
     }, [current, category, priceRange]);
+
 
     const sortProducts = (products, sortBy) => {
         switch (sortBy) {
@@ -151,16 +153,22 @@ const Products = () => {
                     <Loading />
                     :
                     <Row gutter={[23, 23]} className="p-4">
+
                         {
-                            productsArray?.map((product, index) => {
-                                return (
-                                    <Col xs={12} md={8} lg={6} key={index}>
-                                        <Link href={`/product/${product?._id}`}>
-                                            <MainProductCard product={product} />
-                                        </Link>
-                                    </Col>
-                                )
-                            })
+                            productsArray?.length > 0 ?
+                                productsArray?.map((product, index) => {
+                                    return (
+                                        <Col xs={12} md={8} lg={6} key={index}>
+                                            <Link href={`/product/${product?._id}`}>
+                                                <MainProductCard product={product} />
+                                            </Link>
+                                        </Col>
+                                    )
+                                })
+                                :
+                                <Col xs={24} className="text-center">
+                                    <h3 className='text-[36px] font-bold'>No Products Found!</h3>
+                                </Col>
                         }
                     </Row>
             }
