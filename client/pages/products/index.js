@@ -59,7 +59,7 @@ const Products = () => {
         return () => {
 
         }
-    }, []);
+    }, [router.query?.category]);
 
     useEffect(() => {
         getAllData();
