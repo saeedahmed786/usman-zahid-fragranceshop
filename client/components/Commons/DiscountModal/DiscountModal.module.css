@@ -11,6 +11,8 @@
     display: flex;
     gap: 23px;
     align-items: center;
+    flex-wrap: wrap;
+    margin-top: 23px;
 }
 
 .DiscountModal img {
@@ -30,4 +32,10 @@
 .DiscountModal p {
     color: black;
     margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+    .DiscountModal {
+        max-width: 350px;
+    }
 }
