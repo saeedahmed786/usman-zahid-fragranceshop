@@ -159,13 +159,13 @@ const Products = () => {
                 <div className={styles.filterSection}>
                     <Row gutter={[23, 23]}>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Categories" options={categories} />
+                            <Select allowClear className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Categories" options={categories} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} value={brand} onChange={(val) => setBrand(val)} placeholder="Brands" options={brands} />
+                            <Select allowClear className={styles.select} value={brand} onChange={(val) => setBrand(val)} placeholder="Brands" options={brands} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} value={priceRange} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
+                            <Select allowClear className={styles.select} value={priceRange} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
                                 { value: "0-10", label: "$0 - $10" },
                                 { value: "10-20", label: "$10 - $20" },
                                 { value: "20-50", label: "$20 - $50" },
@@ -175,7 +175,7 @@ const Products = () => {
                             ]} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} value={gender} placeholder="Gender" onChange={(val) => setGender(val)} options={[
+                            <Select allowClear className={styles.select} value={gender} placeholder="Gender" onChange={(val) => setGender(val)} options={[
                                 { value: "male", label: "Male" },
                                 { value: "female", label: "Female" },
                                 { value: "others", label: "Others" }
