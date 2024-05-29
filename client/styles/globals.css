@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 :root {
-  --main-body-bg-color: #E9EFEF;
-  --main-bg-color: #083652;
+  --main-body-bg-color: #ffffff;
+  --main-bg-color: #232f3e;
   --main-bg-dark-color: #041b29;
   --main-hover-color: #041b29;
   --main-text-color: #000;

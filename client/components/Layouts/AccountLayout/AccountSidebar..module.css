@@ -1,5 +1,6 @@
 .AccoutSidebar {
     font-size: 15px;
+    padding-top: 30px;
 }
 
 .AccoutSidebar p {
@@ -10,21 +11,26 @@
 
 .AccoutSidebar .item {
     padding: 20px 0px;
+    height: 43px;
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 23px;
 }
 
 .AccoutSidebar .item .circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--main-bg-color);
-    border: 2px solid black;
+    width: 4px;
+    height: 43px;
+    background-color: white;
+}
+
+.AccoutSidebar .item.active {
+    background-color: #e3e4e6;
 }
 
 .AccoutSidebar .item.active .circle {
-    background-color: white;
+    background-color: var(--main-bg-color);
+    border: 2px solid black;
 }
 
 .AccoutSidebar .item a {

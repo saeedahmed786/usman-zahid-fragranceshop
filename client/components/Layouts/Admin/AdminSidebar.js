@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { EditOutlined, GroupOutlined, HomeOutlined, LogoutOutlined, PlusOutlined, ShoppingFilled, UsergroupAddOutlined, UserOutlined } from '@ant-design/icons'
+import { BranchesOutlined, EditOutlined, GroupOutlined, HomeOutlined, LogoutOutlined, PlusOutlined, ShoppingFilled, UsergroupAddOutlined, UserOutlined } from '@ant-design/icons'
 import { IoDocument } from 'react-icons/io5'
 import { logout } from '@/components/Commons/Auth/Auth'
 
@@ -25,6 +25,14 @@ const AdminSidebar = () => {
                             <button className={`${router.pathname === "/admin/categories" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
                                 <GroupOutlined />
                                 <span>Categories</span>
+                            </button>
+                        </Link>
+                    </div>
+                    <div className='mb-6'>
+                        <Link href="/admin/brands">
+                            <button className={`${router.pathname === "/admin/brands" ? "activeLink text-[#fff] flex gap-3 items-center" : "flex gap-3 items-center text-[#000]"}`}>
+                                <BranchesOutlined />
+                                <span>Brands</span>
                             </button>
                         </Link>
                     </div>

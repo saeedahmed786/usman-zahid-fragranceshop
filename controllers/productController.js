@@ -34,6 +34,14 @@ exports.getLimitedProducts = async (req, res) => {
       query.subCategory = req.body.category;
     }
 
+    if (req.body.brand) {
+      query.brand = req.body.brand;
+    }
+
+    if (req.body.gender) {
+      query.gender = { $regex: new RegExp(req.body.gender, 'i') }
+    }
+
     if (minPrice && maxPrice) {
       query.price = { $gte: minPrice, $lte: maxPrice }; // Filter by price range
     }
@@ -41,7 +49,7 @@ exports.getLimitedProducts = async (req, res) => {
     const PAGE_SIZE = 20;
     const page = parseInt(req.params.page || "0")
     const products = await Product.find(query).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
-      .populate('mainCategory subCategory').sort({ createdAt: -1 }).exec();
+      .populate('mainCategory subCategory brand').sort({ createdAt: -1 }).exec();
     const count = await Product.countDocuments({});
     if (products) {
       res.status(200).send({ products, count });
@@ -55,8 +63,8 @@ exports.getLimitedProducts = async (req, res) => {
 }
 
 exports.getFeaturedProducts = async (req, res) => {
-  const products = await Product.find({ featured: true }).limit(20).sort({ "createdAt": '-1' })
-    .populate('mainCategory subCategory').exec();
+  const products = await Product.find({ featured: "yes" }).limit(20).sort({ "createdAt": '-1' })
+    .populate('mainCategory subCategory brand').exec();
   try {
     if (products) {
       res.status(200).send(products);
@@ -72,7 +80,7 @@ exports.getFeaturedProducts = async (req, res) => {
 exports.getAllAdminProducts = async (req, res) => {
   try {
     const products = await Product.find()
-      .populate('mainCategory subCategory').exec();
+      .populate('mainCategory subCategory brand').exec();
     if (products) {
       res.status(200).send(products);
     } else {
@@ -101,7 +109,7 @@ exports.getProductById = async (req, res) => {
 exports.searchProducts = async (req, res) => {
   try {
     const findProducts = await Product.find({ $or: [{ title: { $regex: new RegExp(req.body.title, 'i') } }, { subTitle: { $regex: new RegExp(req.body.title, 'i') } }] })
-      .populate('mainCategory subCategory')
+      .populate('mainCategory subCategory brand')
       .exec();
     if (findProducts) {
       res.status(200).json(findProducts);
@@ -141,7 +149,7 @@ exports.filterProducts = async (req, res) => {
 
     const findProducts = await Product.find(query)
       .limit(PAGE_SIZE).skip(PAGE_SIZE * page)
-      .populate('mainCategory subCategory').exec();
+      .populate('mainCategory subCategory brand').exec();
     if (findProducts) {
       res.status(200).json(findProducts);
     } else {
@@ -170,6 +178,7 @@ exports.uploadProduct = async (req, res) => {
       featured: req.body.featured,
       mainCategory: req.body.mainCategory,
       subCategory: req.body.subCategory,
+      brand: req.body.brand,
       pictures: req.body.pictures
     });
 
@@ -202,6 +211,7 @@ exports.updateProduct = async (req, res) => {
       findProduct.featured = req.body.featured;
       findProduct.mainCategory = req.body.mainCategory;
       findProduct.subCategory = req.body.subCategory;
+      findProduct.brand = req.body.brand;
       findProduct.pictures = req.body.pictures;
       findProduct.description = req.body.description;
 

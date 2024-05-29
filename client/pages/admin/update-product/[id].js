@@ -9,7 +9,7 @@ import { ErrorAlert, SuccessAlert } from '@/components/Commons/Messages/Messages
 import Link from 'next/link';
 import DragUpload from '@/components/Commons/DragUpload/DragUpload';
 import { useRouter } from 'next/router';
- 
+
 const UpdateProduct = () => {
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const router = useRouter();
@@ -17,6 +17,7 @@ const UpdateProduct = () => {
     const [untrimmedCategories, setUntrimmedCategories] = useState([]);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({});
     const [formData, setFormData] = useState({
@@ -31,6 +32,7 @@ const UpdateProduct = () => {
         description: "",
         mainCategory: "",
         subCategory: "",
+        brand: ""
     });
 
     /*********************************************** onChange *******************************************/
@@ -111,8 +113,32 @@ const UpdateProduct = () => {
         })
     }
 
+    const getAllBrands = async () => {
+        setLoading(true);
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/brands/get`).then(res => {
+            setLoading(false);
+            if (res.statusText === "OK") {
+                let formatIt = res.data.map(obj => {
+                    return {
+                        value: obj._id,
+                        label: obj.name
+                    };
+                });
+                setBrands(formatIt)
+            } else {
+                ErrorAlert(res.data.errorMessage);
+            }
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
+
+
     useEffect(() => {
         getAllCategories();
+        getAllBrands();
         productId !== undefined && getProductById(productId);
 
         return () => {
@@ -182,7 +208,7 @@ const UpdateProduct = () => {
                             <Select className='w-full' value={formData.gender} placeholder="Gender" onChange={(value) => handleChange("gender", value)} options={[
                                 { value: "male", label: "Male" },
                                 { value: "female", label: "Female" },
-                                { value: "other", label: "Other" }
+                                { value: "others", label: "Others" }
                             ]} />
                         </div>
                         <div className='mt-3'>
@@ -218,6 +244,18 @@ const UpdateProduct = () => {
                                 onChange={(val) => handleChange("subCategory", val)}
                                 className='mb-3 w-full'
                                 options={subCategories}
+                            />
+                        </div>
+                        <div>
+                            <label>Brand</label> < br />
+                            <Select
+                                value={formData?.brand}
+                                showSearch
+                                placeholder="Please select brand"
+                                allowClear
+                                onChange={(val) => handleChange("brand", val)}
+                                className='mb-3 w-full'
+                                options={brands}
                             />
                         </div>
                         <Button type='primary' htmlType="submit" loading={loading} disabled={loading} className="mt-4">Submit</Button>

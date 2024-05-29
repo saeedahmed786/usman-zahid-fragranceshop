@@ -9,14 +9,14 @@
 
 .SearchBox .search>span input {
     height: 45px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 .SearchBox .search>span button {
     height: 45px;
-    border-top-right-radius: 20px !important;
-    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
     width: 40px;
     color: white !important;
 }

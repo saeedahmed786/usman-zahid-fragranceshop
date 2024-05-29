@@ -10,7 +10,7 @@ header .left {
 }
 
 header .swiperSlide>div {
-    max-width: 1145px;
+    /* max-width: 1145px; */
     /* margin: 0px auto; */
     background-color: white !important;
 }

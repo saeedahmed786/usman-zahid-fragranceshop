@@ -1,5 +1,5 @@
 .product>div {
-    max-width: 1145px;
+    max-width: 1400px;
     margin: 20px auto;
 }
 
@@ -14,7 +14,7 @@
 
 .product .Carousel img {
     width: 100% !important;
-    max-height: 75vh;
+    max-height: 80vh;
 }
 
 .product .thumbContainer,
@@ -56,8 +56,6 @@
     font-size: 23px;
     font-weight: 500;
     color: var(--main-bg-color);
-    background-color: rgb(252, 232, 206) !important;
-    margin: 20px 0px;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -72,15 +70,14 @@
 .product .right h6 {
     font-size: 17px;
     font-weight: 400;
+    margin: 20px 0px;
+    text-decoration: line-through;
 }
 
 
-.product .right h5 .save {
-    color: #b71540;
-}
-
-.product .description {
-    max-width: 600px;
+.product .right .save {
+    color: #f7235b;
+    font-size: 23px;
 }
 
 .product .description h4 {

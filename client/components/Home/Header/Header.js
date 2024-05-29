@@ -1,6 +1,6 @@
 import React from 'react'
 import defaImg from "../../../public/assets/sale.webp";
-import offImage from "../../../public/assets/headeroff.jpeg";
+import offImage from "../../../public/assets/headeroff.svg";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';

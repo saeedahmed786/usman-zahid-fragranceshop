@@ -2,7 +2,7 @@ import { Input, Modal } from 'antd';
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import styles from './DiscountModal.module.css'
-import sale from "../../../public/assets/off.jpeg"
+import sale from "../../../public/assets/off.svg"
 import { ButtonComp } from '../ButtonComp/ButtonComp';
 import { useRouter } from 'next/router';
 
@@ -10,7 +10,6 @@ export const DiscountModal = ({ }) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [firstVisit, setFirstVisit] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -32,6 +31,12 @@ export const DiscountModal = ({ }) => {
     }
   }, [])
 
+  const handleSubmit = () => {
+    handleCancel();
+    localStorage.setItem("email", email);
+    router.push(`/signup`);
+  }
+
 
   return (
     <Modal title={false} className={styles.DiscountModal} footer={false} open={isModalOpen} onCancel={handleCancel}>
@@ -45,7 +50,7 @@ export const DiscountModal = ({ }) => {
             <Input placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className='mt-3'>
-            <ButtonComp text="Submit" onClick={() => router.push(`/signup?email=${email}`)} />
+            <ButtonComp text="Submit" onClick={handleSubmit} />
           </div>
         </div>
       </div>

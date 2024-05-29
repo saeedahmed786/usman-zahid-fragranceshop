@@ -1,5 +1,5 @@
 .Navbar {
-    padding: 0px 36px;
+    padding: 10px 36px;
     /* mix-blend-mode: difference; */
     position: relative;
     width: 100%;
@@ -79,6 +79,10 @@
         align-items: center;
     }
 
+    .searchBox {
+        display: none;
+    }
+
     .Navbar .rightDesktop {
         display: none;
     }
@@ -107,7 +111,7 @@
 
     .drawer .right {
         display: block;
-    } 
+    }
 
     .drawer .right>div:first-of-type {
         width: 100% !important;

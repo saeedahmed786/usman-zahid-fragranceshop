@@ -5,7 +5,7 @@ import { Button, Input } from "antd";
 import { ErrorAlert, SuccessAlert } from "@/components/Commons/Messages/Messages";
 import DragUpload from "@/components/Commons/DragUpload/DragUpload";
 
-export const CreateMainCategories = ({ updateFunction }) => {
+export const CreateBrands = ({ updateFunction }) => {
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -20,7 +20,6 @@ export const CreateMainCategories = ({ updateFunction }) => {
     });
   }
 
-  
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -35,7 +34,7 @@ export const CreateMainCategories = ({ updateFunction }) => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/main/create`, formData, {
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/brands/create`, formData, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token")
         }
@@ -57,15 +56,15 @@ export const CreateMainCategories = ({ updateFunction }) => {
 
   return (
     <div>
-      <button className='rounded-[12px] text-white h-[48px] px-6' onClick={showModal}>Create Category</button>
-      <Modal destroyOnClose title="New Category" footer={false} visible={isModalVisible} onCancel={handleCancel}>
+      <button className='rounded-[12px] text-white h-[48px] px-6' onClick={showModal}>Create Brand</button>
+      <Modal destroyOnClose title="New Brand" footer={false} visible={isModalVisible} onCancel={handleCancel}>
         <form onSubmit={submitHandler} className="text-center create-posts">
           <div className="mt-4">
             <Input
               required
               type="text"
               className="form-control"
-              placeholder="Enter Category Title"
+              placeholder="Enter Brand Title"
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>

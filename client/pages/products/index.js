@@ -20,10 +20,11 @@ const Products = () => {
     const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState();
     const [current, setCurrent] = useState(1);
+    const [gender, setGender] = useState("");
 
     const getAllData = async () => {
         setLoading(true);
-        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange }).then(res => {
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange, gender }).then(res => {
             setLoading(false);
             if (res.status === 200) {
                 setProductsArray(res.data?.products);
@@ -33,6 +34,7 @@ const Products = () => {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
+            setLoading(true);
             console.log(err)
         });
     }
@@ -48,6 +50,7 @@ const Products = () => {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
+            setLoading(true);
             console.log(err)
         })
     }
@@ -57,10 +60,13 @@ const Products = () => {
         if (router.query?.category) {
             setCategory(router.query?.category)
         }
+        if (router.query?.gender) {
+            setGender(router.query?.gender)
+        }
         return () => {
 
         }
-    }, [router.query?.category]);
+    }, [router.query]);
 
     useEffect(() => {
         getAllData();
@@ -68,7 +74,7 @@ const Products = () => {
         return () => {
 
         }
-    }, [current, category, priceRange]);
+    }, [current, category, priceRange, gender]);
 
 
 
@@ -96,6 +102,13 @@ const Products = () => {
             const sorted = sortProducts(productsArray, value);
             setProductsArray(sorted);
         }
+    };
+
+    const handleResetFilters = () => {
+        setCategory("");
+        setPriceRange("");
+        setGender("");
+        router.push("/products");
     };
 
     return (
@@ -137,14 +150,21 @@ const Products = () => {
                             ]} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} placeholder="Gift Set" options={[
-                                { value: "yes", label: "Yes" },
-                                { value: "noe", label: "No" }
+                            <Select className={styles.select} value={gender} placeholder="Gender" onChange={(val) => setGender(val)} options={[
+                                { value: "male", label: "Male" },
+                                { value: "female", label: "Female" },
+                                { value: "others", label: "Others" }
                             ]} />
                         </Col>
+                        {/* <Col xs={12} md={8} lg={6}>
+                            <Select className={styles.select} placeholder="Gift Set" options={[
+                                { value: "yes", label: "Yes" },
+                                { value: "no", label: "No" }
+                            ]} />
+                        </Col> */}
                         <Col xs={24} md={8} lg={6}>
                             <div className='md:max-w-[200px]'>
-                                <ButtonComp text="Reset All Filters" onClick={() => { setCategory(""); setPriceRange("") }} />
+                                <ButtonComp text="Reset All Filters" onClick={handleResetFilters} />
                             </div>
                         </Col>
                     </Row>

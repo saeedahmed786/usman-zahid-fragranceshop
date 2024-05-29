@@ -234,7 +234,7 @@ const CheckoutPage = () => {
         </Col>
         <Col xs={24} md={7} className={styles.right}>
           <div className="p-[17px] md:p-[40px] mb-10 md:mb-0">
-            <div className={styles.promotionCode}>
+            {/* <div className={styles.promotionCode}>
               <h5>Promotion Code</h5>
               <Search
                 placeholder="Enter Promotion Code"
@@ -242,7 +242,7 @@ const CheckoutPage = () => {
                 enterButton="Apply"
                 size="large"
               />
-            </div>
+            </div> */}
             <h3>Order Details:</h3>
             <div className={styles.orderDetailItem}>
               <h5>Product Total</h5>

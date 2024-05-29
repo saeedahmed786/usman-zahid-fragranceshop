@@ -110,6 +110,17 @@ const Products = () => {
             ),
         },
         {
+            title: "Brand",
+            dataIndex: 'brand',
+            key: 'category',
+            sorter: (a, b) => a?.brand?.name?.localeCompare(b?.brand),
+            render: (_, { brand }) => (
+                <>
+                    <div className='text-[#0094DA] text-[12px] font-[500]'>{brand?.name}</div>
+                </>
+            ),
+        },
+        {
             title: "Created Date",
             dataIndex: 'createdAt',
             key: 'createdAt',

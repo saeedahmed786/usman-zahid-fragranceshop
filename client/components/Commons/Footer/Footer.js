@@ -21,17 +21,21 @@ const Footer = () => {
                                 Lörem ipsum prektigt beren makroligt, till desena. Lasock heterok. Nir nist så keltisk tiger usat fast bior. Rebel nedyn prertad krod semigon.
                             </p>
                             <div className={'flex items-center gap-4'}>
-                                {[BsFacebook, BsTwitter, BsInstagram, BsLinkedin].map((Icon, index) => {
-                                    return (
-                                        <Fragment key={index}>
-                                            <button className={"hover:opacity-90 bg-transparent w-[40px] h-[40px] rounded-full border border-light__gray__color flex items-center justify-center"} type={"button"}>
-                                                <span className={"text-lg text-white"}>
-                                                    <Icon />
-                                                </span>
-                                            </button>
-                                        </Fragment>
-                                    )
-                                })}
+                                <a href="https://www.facebook.com/" target="_blank" className={"hover:opacity-90 bg-transparent w-[40px] h-[40px] rounded-full border border-light__gray__color flex items-center justify-center"} type={"a"}>
+                                    <span className={"text-lg text-white"}>
+                                        <BsFacebook />
+                                    </span>
+                                </a>
+                                <a href="https://www.twitter.com/" target="_blank" className={"hover:opacity-90 bg-transparent w-[40px] h-[40px] rounded-full border border-light__gray__color flex items-center justify-center"} type={"a"}>
+                                    <span className={"text-lg text-white"}>
+                                        <BsTwitter />
+                                    </span>
+                                </a>
+                                <a href="https://www.linkedin.com/" target="_blank" className={"hover:opacity-90 bg-transparent w-[40px] h-[40px] rounded-full border border-light__gray__color flex items-center justify-center"} type={"a"}>
+                                    <span className={"text-lg text-white"}>
+                                        <BsLinkedin />
+                                    </span>
+                                </a>
                             </div>
                         </Col>
                         <Col xs={24} md={8} lg={6} className="">
@@ -57,20 +61,26 @@ const Footer = () => {
                         <Col xs={24} md={8} lg={6} className="text-start">
                             <h2 className={"text-white font-[700] text-[16px] leading-[24px]"}>Contact Us</h2>
                             <div className={"text-start flex flex-col gap-3 mt-[16px] md__custom:items-center"}>
-                                {[{ Icon: BsEnvelope, text: 'shop@gmail.com' }, { Icon: FiPhoneCall, text: '+213543823124' }, { Icon: IoLocationOutline, text: 'Algiers, Algeria' }, { Icon: BsWhatsapp, text: '+213540070124' }].map(el => {
-                                    return (
-                                        <Fragment key={el.text}>
-                                            <div className={"flex items-center gap-2"}>
-                                                <button className={"hover:opacity-90 p-[7px] bg-transparent w-[24px] h-[24px] rounded-full border border-white flex items-center justify-center"} type={"button"}>
-                                                    <span className={"text-[10px] text-white"}>
-                                                        <el.Icon />
-                                                    </span>
-                                                </button>
-                                                <p className={"text-[#A7ADBA]  text-[12px] font-[400] tracking-wide"}>{el.text}</p>
-                                            </div>
-                                        </Fragment>
-                                    )
-                                })}
+                                <a href="mailto:shop@gmail.com ">
+                                    <div className={"flex items-center gap-2"}>
+                                        <button className={"hover:opacity-90 p-[7px] bg-transparent w-[24px] h-[24px] rounded-full border border-white flex items-center justify-center"} type={"button"}>
+                                            <span className={"text-[10px] text-white"}>
+                                                <BsEnvelope />
+                                            </span>
+                                        </button>
+                                        <p className={"text-[#A7ADBA]  text-[12px] font-[400] tracking-wide"}>shop@gmail.com</p>
+                                    </div>
+                                </a>
+                                <a href="tel: +213543823124">
+                                    <div className={"flex items-center gap-2"}>
+                                        <button className={"hover:opacity-90 p-[7px] bg-transparent w-[24px] h-[24px] rounded-full border border-white flex items-center justify-center"} type={"button"}>
+                                            <span className={"text-[10px] text-white"}>
+                                                <FiPhoneCall />
+                                            </span>
+                                        </button>
+                                        <p className={"text-[#A7ADBA]  text-[12px] font-[400] tracking-wide"}>+213543823124</p>
+                                    </div>
+                                </a>
                             </div>
                         </Col>
                         <Col xs={24} md={8} lg={6}>

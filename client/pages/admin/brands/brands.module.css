@@ -1,0 +1,11 @@
+.brands .manageBrands {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.brands .manageBrands button {
+    background-color: var(--main-bg-color);
+    color: white;
+}
