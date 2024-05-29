@@ -7,7 +7,6 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const brandRoutes = require('./routes/brandRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
-const commentRoutes = require('./routes/commentRoutes');
 const discountRoutes = require('./routes/discountRoutes');
 const mongoose = require('mongoose');
 // const path = require('path');
@@ -28,7 +27,6 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/brands', brandRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
-app.use('/api/comments', commentRoutes);
 app.use('/api/discounts', discountRoutes);
 
 /******************************************  MongoDb Connection  ********************************************/

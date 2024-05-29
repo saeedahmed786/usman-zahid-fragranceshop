@@ -77,7 +77,7 @@ exports.getAllMainCategories = async (req, res) => {
 }
 
 exports.getAllSubCategories = async (req, res) => {
-    Category.find({ parentId: { $exists: true } })
+    Category.find({ parentId: { $exists: true } }).populate("parentId")
         .exec((error, categories) => {
             if (error) {
                 res.status(404).json({ errorMessage: 'Error in finding categories' });

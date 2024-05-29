@@ -15,7 +15,9 @@ const Products = () => {
     const [productsArray, setProductsArray] = useState([]);
     const [sortValue, setSortValue] = useState("");
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [category, setCategory] = useState(router.query.category);
+    const [brand, setBrand] = useState(router.query.brand);
     const [priceRange, setPriceRange] = useState();
     const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState();
@@ -24,7 +26,7 @@ const Products = () => {
 
     const getAllData = async () => {
         setLoading(true);
-        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange, gender }).then(res => {
+        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange, gender, brand }).then(res => {
             setLoading(false);
             if (res.status === 200) {
                 setProductsArray(res.data?.products);
@@ -44,7 +46,23 @@ const Products = () => {
         await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then((res) => {
             setLoading(false);
             if (res.status === 200) {
-                setCategories(res.data?.map(f => ({ value: f?._id, label: f?.name })));
+                setCategories(res.data?.map(f => ({ value: f?._id, label: `${f?.parentId?.name} ${f?.name}` })));
+            }
+            else {
+                ErrorAlert(res.data.errorMessage);
+            }
+        }).catch(err => {
+            setLoading(true);
+            console.log(err)
+        })
+    }
+
+    const getAllBrands = async () => {
+        setLoading(true);
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/brands/get`).then((res) => {
+            setLoading(false);
+            if (res.status === 200) {
+                setBrands(res.data?.map(f => ({ value: f?._id, label: f?.name })));
             }
             else {
                 ErrorAlert(res.data.errorMessage);
@@ -57,11 +75,15 @@ const Products = () => {
 
     useEffect(() => {
         getAllSubCategories();
+        getAllBrands();
         if (router.query?.category) {
             setCategory(router.query?.category)
         }
         if (router.query?.gender) {
             setGender(router.query?.gender)
+        }
+        if (router.query?.brand) {
+            setBrand(router.query?.brand)
         }
         return () => {
 
@@ -74,7 +96,7 @@ const Products = () => {
         return () => {
 
         }
-    }, [current, category, priceRange, gender]);
+    }, [current, category, priceRange, gender, brand]);
 
 
 
@@ -137,7 +159,10 @@ const Products = () => {
                 <div className={styles.filterSection}>
                     <Row gutter={[23, 23]}>
                         <Col xs={12} md={8} lg={6}>
-                            <Select className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Brand" options={categories} />
+                            <Select className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Categories" options={categories} />
+                        </Col>
+                        <Col xs={12} md={8} lg={6}>
+                            <Select className={styles.select} value={brand} onChange={(val) => setBrand(val)} placeholder="Brands" options={brands} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
                             <Select className={styles.select} value={priceRange} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
