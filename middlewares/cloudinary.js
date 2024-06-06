@@ -17,7 +17,9 @@ exports.uploads = (file, folder) => {
             })
         }, {
             resource_type: "auto",
-            folder
+            folder,
+            quality: "auto:best",
+            fetch_format: "auto",
         })
     })
 }
