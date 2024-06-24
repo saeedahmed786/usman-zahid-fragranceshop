@@ -18,11 +18,13 @@ import Link from "next/link";
 import { Navigation } from "swiper/modules";
 import { Col, Row } from "antd";
 import Head from "next/head";
+import MobileCategories from "@/components/Home/MobileCategories/MobileCategories";
 
 const Home = () => {
   const [productsArray, setProductsArray] = useState([]);
   const [featuredProductsArray, setFeaturedProductsArray] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getAllData = async (e) => {

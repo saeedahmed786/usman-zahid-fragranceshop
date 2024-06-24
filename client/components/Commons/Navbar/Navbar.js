@@ -9,12 +9,16 @@ import SearchBox from './SearchBox/SearchBox'
 import { useRouter } from 'next/router'
 import { logout } from '../Auth/Auth'
 import CategoriesBar from '../CategoriesBar/CategoriesBar'
+import MobileCategories from '@/components/Home/MobileCategories/MobileCategories'
+import { ErrorAlert } from '../Messages/Messages'
+import axios from 'axios'
 
 export const Navbar = () => {
   const router = useRouter();
   const { cart } = useCart();
   const [user, setUser] = useState({});
   const [open, setOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -25,11 +29,24 @@ export const Navbar = () => {
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
+    getAllCategories();
 
     return () => {
 
     }
-  }, [])
+  }, []);
+
+  const getAllCategories = async () => {
+    await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/get`).then(res => {
+      if (res.statusText === "OK") {
+        setCategories(res.data?.map(cat => ({ label: cat?.name, value: cat?._id, children: cat?.children?.map(child => ({ label: child?.name, value: child?._id })) })));
+      } else {
+        ErrorAlert(res.data.errorMessage);
+      }
+    }).catch(err => {
+      ErrorAlert(err?.message);
+    })
+  }
 
   useEffect(() => {
     onClose();
@@ -45,6 +62,9 @@ export const Navbar = () => {
       <nav className={styles.Navbar}>
         <div className={styles.upper}>
           <div className={styles.left}>
+            <div className={styles.MobileCategories}>
+              <MobileCategories data={categories} />
+            </div>
             <div className={styles.logo}>
               <Link href="/">
                 <LogoComp />
@@ -108,7 +128,9 @@ export const Navbar = () => {
           </div>
         </Drawer>
       </nav>
-      <CategoriesBar />
+      <div className={styles.DesktopCategories}>
+        <CategoriesBar />
+      </div>
     </>
   )
 }

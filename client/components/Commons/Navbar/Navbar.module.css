@@ -64,6 +64,9 @@
     text-align: right;
 }
 
+.DesktopCategories {
+    display: block;
+}
 
 .Navbar .badge sup {
     background-color: var(--main-bg-color) !important;
@@ -71,7 +74,15 @@
     left: 4px;
 }
 
-@media (max-width:767px) {
+.MobileCategories {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .MobileCategories {
+        display: block;
+    }
+
     .Navbar {
         padding: 10px !important;
         display: flex;
@@ -90,6 +101,10 @@
     .Navbar a {
         color: black !important;
         /* background-color: transparent !important; */
+    }
+
+    .DesktopCategories {
+        display: none;
     }
 
     .logo {

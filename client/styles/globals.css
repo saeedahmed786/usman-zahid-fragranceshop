@@ -97,3 +97,11 @@ h1 {
 .carousel .thumbs-wrapper {
   overflow-x: auto !important;
 }
+
+.navDrawer {
+  width: max-content !important;
+}
+
+.navDrawer .ant-drawer-body {
+  padding: 10px !important;
+}
