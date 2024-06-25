@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './products.module.css';
 import Loading from '@/components/Commons/Loading/Loading';
 import { ButtonComp } from '@/components/Commons/ButtonComp/ButtonComp';
+import Head from 'next/head';
 
 
 const Products = () => {
@@ -135,6 +136,24 @@ const Products = () => {
 
     return (
         <div className={styles.products}>
+            <Head>
+                <meta charSet="utf-8" />
+                <title>Shop | High-Quality Fragrances for Men and Women</title>
+                <link rel="canonical" href="https://ecomm-shop.vercel.app/" />
+                <meta name="robots" content="index, follow" />
+                <meta name="description" content="Discover a vast selection of high-quality perfumes, aftershaves, and colognes for men and women at My Shop. Featuring top brands like Dior, Versace, and more." />
+                <meta name="keywords" content="perfumes, aftershaves, colognes, fragrances, men's fragrances, women's fragrances, Dior, Versace, Rabanne, high-quality perfumes, cheap perfume, fragrance offers, fragrance quiz, online quiz, fragrance match" />
+                <meta name="author" content="Saeed Ahmed Chachar" />
+                <meta property="og:title" content="My Shop | High-Quality Fragrances for Men and Women" />
+                <meta property="og:type" content="website" />
+                <meta property="og:description" content="Shop at My Shop for a wide range of perfumes and aftershaves from top brands. Enjoy great offers and exceptional customer service." />
+                <meta property="og:image" content="/public/assets/new.webp" />
+                <meta property="og:url" content="https://ecomm-shop.vercel.app" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="My Shop | High-Quality Fragrances for Men and Women" />
+                <meta name="twitter:description" content="Discover a wide range of perfumes, aftershaves, and colognes at My Shop. Featuring top brands and great offers." />
+                <meta name="twitter:image" content="/public/assets/new.webp" />
+            </Head>
             <div className={styles.top}>
                 <h1>All Products</h1>
                 <p>has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>

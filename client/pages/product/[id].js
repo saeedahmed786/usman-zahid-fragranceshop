@@ -76,16 +76,16 @@ const ProductPage = () => {
     return (
         <>
             <Head>
-                <title>{product.title ? `${product.title} | My Shop` : 'My Shop'}</title>
+                <title>{`My Shop | ${product?.title}`}</title>
                 <meta name="description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
                 <meta name="keywords" content={`buy ${product.title}, ${product.mainCategory}, ${product.subCategory}, ${product.brand}, best prices, online shop`} />
-                <meta name="author" content="My Shop" />
-                <meta property="og:title" content={product.title ? `${product.title} | My Shop` : 'My Shop'} />
+               <meta name="author" content="Saeed Ahmed Chachar" />
+                <meta property="og:title" content={`My Shop | ${product?.title}`} />
                 <meta property="og:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
                 <meta property="og:image" content={product.pictures && product.pictures[0] ? product.pictures[0].response.url : '/public/assets/default-image.webp'} />
-                <meta property="og:url" content={`https://www.myshop.com/product/${product._id}`} />
+                <meta property="og:url" content={`https://ecomm-shop.vercel.app/product/${product._id}`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={product.title ? `${product.title} | My Shop` : 'My Shop'} />
+                <meta name="twitter:title" content={`My Shop | ${product?.title}`} />
                 <meta name="twitter:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
                 <meta name="twitter:image" content={product.pictures && product.pictures[0] ? product.pictures[0].response.url : '/public/assets/default-image.webp'} />
             </Head>
