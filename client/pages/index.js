@@ -89,6 +89,7 @@ const Home = () => {
     <>
       <Head>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="qUuWz-6KS_K3fHN1ed57wyNDlq_lC1rkPhS4Rt5KSu0" />
         <title>My Shop | High-Quality Fragrances for Men and Women</title>
         <link rel="canonical" href="https://ecomm-shop.vercel.app/" />
         <meta name="robots" content="index, follow" />
