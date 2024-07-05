@@ -13,8 +13,6 @@ import axios from "axios";
 import Loading from "@/components/Commons/Loading/Loading";
 import { isAuthenticated } from "@/components/Commons/Auth/Auth";
 
-const { Search } = Input;
-
 const CheckoutPage = () => {
   const [form] = Form.useForm();
   const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -24,13 +22,18 @@ const CheckoutPage = () => {
   const [clientSecret, setClientSecret] = useState("");
   const [address, setAddress] = useState({});
   const [showPayment, setShowPayment] = useState(false);
+  const [orders, setOrders] = useState([]);
   const { cart, clearCart } = useCart();
+  const [isFirstOrder, setIsFirstOrder] = useState(false);
 
   const totalAmount = cart?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0);
   const deliveryFee = totalAmount > 50 ? 0 : 3.95;
 
+  // Apply 10% discount if it's the user's first order
+  const discountedTotal = isFirstOrder ? totalAmount * 0.9 : totalAmount;
+
   const transactionSuccess = async (data) => {
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/place-order`, { placed: moment().format("dddd, MMMM Do YYYY, h:mm:ss a"), totalPrice: totalAmount + deliveryFee, user: isAuthenticated(), cartProducts: cart, address, paymentData: data }
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/place-order`, { placed: moment().format("dddd, MMMM Do YYYY, h:mm:ss a"), totalPrice: discountedTotal + deliveryFee, user: isAuthenticated(), cartProducts: cart, address, paymentData: data }
       , {
         headers: {
           'authorization': 'Bearer ' + localStorage.getItem('token')
@@ -53,7 +56,6 @@ const CheckoutPage = () => {
         console.log(err)
         ErrorAlert(err?.message);
       })
-
   }
 
   const createPaymentIntent = async (price) => {
@@ -76,9 +78,31 @@ const CheckoutPage = () => {
     }
   }
 
+  const getAllOrders = async () => {
+    if (isAuthenticated() && isAuthenticated()?._id) {
+      await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/customer/orders/${isAuthenticated()?._id}`, {
+        headers: {
+          'authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          setOrders(res.data);
+          setIsFirstOrder(res.data.length === 0); // Check if it's the first order
+        }
+        else {
+          ErrorAlert(res.data.errorMessage);
+        }
+      }).catch(err => {
+        console.log(err)
+        ErrorAlert(err?.message);
+      })
+    }
+  }
+
   useEffect(() => {
+    getAllOrders();
     if (cart?.length > 0) {
-      createPaymentIntent(totalAmount + deliveryFee);
+      createPaymentIntent(discountedTotal + deliveryFee);
     } else {
       router.push("/cart");
     }
@@ -86,7 +110,7 @@ const CheckoutPage = () => {
     return () => {
 
     }
-  }, []);
+  }, [cart, discountedTotal]);
 
   const appearance = {
     theme: 'stripe',
@@ -214,7 +238,7 @@ const CheckoutPage = () => {
               showPayment &&
               (
                 <>
-                  <h2 className="text-[28px]">Please pay total amount of <b>£{totalAmount}</b> to process your order.</h2>
+                  <h2 className="text-[28px]">Please pay total amount of <b>£{discountedTotal.toFixed(2)}</b> to process your order.</h2>
                   {
                     stripeLoading ?
                       <Loading />
@@ -223,7 +247,7 @@ const CheckoutPage = () => {
                       (
                         <div>
                           <Elements options={options} stripe={stripePromise}>
-                            <StripeForm totalPrice={parseInt(totalAmount + deliveryFee)} placeOrder={transactionSuccess} />
+                            <StripeForm totalPrice={parseInt(discountedTotal + deliveryFee)} placeOrder={transactionSuccess} />
                           </Elements>
                         </div>
                       )
@@ -235,27 +259,24 @@ const CheckoutPage = () => {
         </Col>
         <Col xs={24} md={7} className={styles.right}>
           <div className="p-[17px] md:p-[40px] mb-10 md:mb-0">
-            {/* <div className={styles.promotionCode}>
-              <h5>Promotion Code</h5>
-              <Search
-                placeholder="Enter Promotion Code"
-                allowClear
-                enterButton="Apply"
-                size="large"
-              />
-            </div> */}
             <h3>Order Details:</h3>
             <div className={styles.orderDetailItem}>
               <h5>Product Total</h5>
               <h5>£{totalAmount}</h5>
             </div>
+            {isFirstOrder && (
+              <div className={styles.orderDetailItem}>
+                <h5>First Order Discount (10%)</h5>
+                <h5>-£{(totalAmount * 0.1).toFixed(2)}</h5>
+              </div>
+            )}
             <div className={styles.orderDetailItem}>
               <h5>Delivery Fee</h5>
               <h5>£{deliveryFee}</h5>
             </div>
             <div className={styles.orderDetailItem}>
               <h5>Order Total <br /> <span>(excluding delivery)</span> </h5>
-              <h5>£{totalAmount + deliveryFee}</h5>
+              <h5>£{(discountedTotal + deliveryFee).toFixed(2)}</h5>
             </div>
             <div>
               <ButtonComp text="BACK" onClick={() => router.push("/cart")} />
