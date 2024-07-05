@@ -27,9 +27,10 @@ const CheckoutPage = () => {
   const { cart, clearCart } = useCart();
 
   const totalAmount = cart?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0);
+  const deliveryFee = totalAmount > 50 ? 0 : 3.95;
 
   const transactionSuccess = async (data) => {
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/place-order`, { placed: moment().format("dddd, MMMM Do YYYY, h:mm:ss a"), totalPrice: totalAmount, user: isAuthenticated(), cartProducts: cart, address, paymentData: data }
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/place-order`, { placed: moment().format("dddd, MMMM Do YYYY, h:mm:ss a"), totalPrice: totalAmount + deliveryFee, user: isAuthenticated(), cartProducts: cart, address, paymentData: data }
       , {
         headers: {
           'authorization': 'Bearer ' + localStorage.getItem('token')
@@ -77,7 +78,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (cart?.length > 0) {
-      createPaymentIntent(totalAmount);
+      createPaymentIntent(totalAmount + deliveryFee);
     } else {
       router.push("/cart");
     }
@@ -222,7 +223,7 @@ const CheckoutPage = () => {
                       (
                         <div>
                           <Elements options={options} stripe={stripePromise}>
-                            <StripeForm totalPrice={parseInt(totalAmount)} placeOrder={transactionSuccess} />
+                            <StripeForm totalPrice={parseInt(totalAmount + deliveryFee)} placeOrder={transactionSuccess} />
                           </Elements>
                         </div>
                       )
@@ -249,8 +250,12 @@ const CheckoutPage = () => {
               <h5>£{totalAmount}</h5>
             </div>
             <div className={styles.orderDetailItem}>
+              <h5>Delivery Fee</h5>
+              <h5>£{deliveryFee}</h5>
+            </div>
+            <div className={styles.orderDetailItem}>
               <h5>Order Total <br /> <span>(excluding delivery)</span> </h5>
-              <h5>£{totalAmount}</h5>
+              <h5>£{totalAmount + deliveryFee}</h5>
             </div>
             <div>
               <ButtonComp text="BACK" onClick={() => router.push("/cart")} />

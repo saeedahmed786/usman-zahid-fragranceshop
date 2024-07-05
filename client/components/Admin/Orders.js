@@ -85,7 +85,7 @@ export const OrderList = (props) => {
 
                                         </td>
                                         <td>
-                                            Total Price : £{order?.products?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0)}
+                                            Total Price : £{order?.totalPrice}
                                         </td>
                                         <td>
                                             Status: &nbsp;

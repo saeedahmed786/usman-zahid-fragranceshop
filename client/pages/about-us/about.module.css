@@ -1,0 +1,84 @@
+.aboutPage {
+    font-family: 'Arial', sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+    color: #555;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #777;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.offers,
+.values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.offerItem,
+.valueItem {
+    flex: 0 0 45%;
+    margin-bottom: 20px;
+}
+
+.offerItem h3,
+.valueItem h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.offerItem p,
+.valueItem p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.2em;
+    color: #555;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}

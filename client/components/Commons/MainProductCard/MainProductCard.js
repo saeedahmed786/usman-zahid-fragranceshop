@@ -10,7 +10,7 @@ export const MainProductCard = ({ product }) => {
         <h2>{product?.title}</h2>
         <h2>{product?.subTitle}</h2>
         <p>{product?.subCategory?.name}</p>
-        <p>From ${product?.price}</p>
+        <p>From £{product?.price}</p>
       </div>
     </div>
   )

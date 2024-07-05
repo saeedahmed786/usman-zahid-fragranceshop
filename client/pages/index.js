@@ -90,20 +90,20 @@ const Home = () => {
       <Head>
         <meta charSet="utf-8" />
         <meta name="google-site-verification" content="qUuWz-6KS_K3fHN1ed57wyNDlq_lC1rkPhS4Rt5KSu0" />
-        <title>My Shop | High-Quality Fragrances for Men and Women</title>
+        <title>Perfume Price | High-Quality Fragrances for Men and Women</title>
         <link rel="canonical" href="https://ecomm-shop.vercel.app/" />
         <meta name="robots" content="index, follow" />
-        <meta name="description" content="Discover a vast selection of high-quality perfumes, aftershaves, and colognes for men and women at My Shop. Featuring top brands like Dior, Versace, and more." />
+        <meta name="description" content="Discover a vast selection of high-quality perfumes, aftershaves, and colognes for men and women at Perfume Price. Featuring top brands like Dior, Versace, and more." />
         <meta name="keywords" content="perfumes, aftershaves, colognes, fragrances, men's fragrances, women's fragrances, Dior, Versace, Rabanne, high-quality perfumes, cheap perfume, fragrance offers, fragrance quiz, online quiz, fragrance match" />
         <meta name="author" content="Saeed Ahmed Chachar" />
-        <meta property="og:title" content="My Shop | High-Quality Fragrances for Men and Women" />
+        <meta property="og:title" content="Perfume Price | High-Quality Fragrances for Men and Women" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Shop at My Shop for a wide range of perfumes and aftershaves from top brands. Enjoy great offers and exceptional customer service." />
+        <meta property="og:description" content="Shop at Perfume Price for a wide range of perfumes and aftershaves from top brands. Enjoy great offers and exceptional customer service." />
         <meta property="og:image" content="/public/assets/new.webp" />
         <meta property="og:url" content="https://ecomm-shop.vercel.app" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="My Shop | High-Quality Fragrances for Men and Women" />
-        <meta name="twitter:description" content="Discover a wide range of perfumes, aftershaves, and colognes at My Shop. Featuring top brands and great offers." />
+        <meta name="twitter:title" content="Perfume Price | High-Quality Fragrances for Men and Women" />
+        <meta name="twitter:description" content="Discover a wide range of perfumes, aftershaves, and colognes at Perfume Price. Featuring top brands and great offers." />
         <meta name="twitter:image" content="/public/assets/new.webp" />
       </Head>
       <div className={styles.home}>
@@ -183,10 +183,10 @@ const Home = () => {
           <Products productsList={productsArray} />
         </div>
         <div className={styles.homeFooter}>
-          <h1 className={styles.title}>About the My Shop</h1>
-          <p>Welcome to The My Shop, your ultimate destination for high-quality perfumes, aftershaves and colognes. We offer a vast selection of fragrances for men and women, featuring top brands such as Dior, Versace, Rabanne, and more. Our commitment to quality extends beyond our fragrances to our exceptional customer service. Our friendly and knowledgeable team is always on hand to answer your questions and provide advice on choosing the right product. We also have amazing fragrance offers so you can enjoy high-quality cheap perfume or aftershave from your favourite brands. We also offer My TFS Membership which gives you 20% off and free express delivery*.</p>
+          <h1 className={styles.title}>About the Perfume Price</h1>
+          <p>Welcome to The Perfume Price, your ultimate destination for high-quality perfumes, aftershaves and colognes. We offer a vast selection of fragrances for men and women, featuring top brands such as Dior, Versace, Rabanne, and more. Our commitment to quality extends beyond our fragrances to our exceptional customer service. Our friendly and knowledgeable team is always on hand to answer your questions and provide advice on choosing the right product. We also have amazing fragrance offers so you can enjoy high-quality cheap perfume or aftershave from your favourite brands. We also offer My TFS Membership which gives you 20% off and free express delivery*.</p>
           <p>You can discover the perfect perfume or aftershave is an effortless journey with Fragrance Match, our innovative online quiz designed to help you pinpoint your ideal scent. Whether you lean towards the crisp notes of fresh florals or the allure of something more exotic and sensual, you will be able to find something you love in our large selection of perfumes, aftershaves and more from top designer brands. You can even spread the cost with our aftershaves and perfumes on finance, splitting the cost over intrest-free monthly payments*.</p>
-          <p>Shop perfume, aftershave and more with confidence at The My Shop.</p>
+          <p>Shop perfume, aftershave and more with confidence at The Perfume Price.</p>
         </div>
       </div>
     </>

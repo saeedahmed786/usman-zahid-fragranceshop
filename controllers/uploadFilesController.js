@@ -6,7 +6,7 @@ exports.uploadFiles = async (req, res) => {
     try {
         console.log(req.file);
         if (req.file) {
-            const uploader = async (path) => await cloudinary.uploads(path, 'My Shop')
+            const uploader = async (path) => await cloudinary.uploads(path, 'Perfume Price')
             const urls = [];
             const { path } = req.file;
             const newPath = await uploader(path)

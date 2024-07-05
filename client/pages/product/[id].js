@@ -76,17 +76,17 @@ const ProductPage = () => {
     return (
         <>
             <Head>
-                <title>{`My Shop | ${product?.title}`}</title>
-                <meta name="description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
+                <title>{`Perfume Price | ${product?.title}`}</title>
+                <meta name="description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at Perfume Price'} />
                 <meta name="keywords" content={`buy ${product.title}, ${product.mainCategory}, ${product.subCategory}, ${product.brand}, best prices, online shop`} />
                <meta name="author" content="Saeed Ahmed Chachar" />
-                <meta property="og:title" content={`My Shop | ${product?.title}`} />
-                <meta property="og:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
+                <meta property="og:title" content={`Perfume Price | ${product?.title}`} />
+                <meta property="og:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at Perfume Price'} />
                 <meta property="og:image" content={product.pictures && product.pictures[0] ? product.pictures[0].response.url : '/public/assets/default-image.webp'} />
                 <meta property="og:url" content={`https://ecomm-shop.vercel.app/product/${product._id}`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={`My Shop | ${product?.title}`} />
-                <meta name="twitter:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at My Shop'} />
+                <meta name="twitter:title" content={`Perfume Price | ${product?.title}`} />
+                <meta name="twitter:description" content={product.description ? product.description.substring(0, 160) : 'Discover high-quality products at Perfume Price'} />
                 <meta name="twitter:image" content={product.pictures && product.pictures[0] ? product.pictures[0].response.url : '/public/assets/default-image.webp'} />
             </Head>
             <div className={styles.product}>
@@ -126,12 +126,12 @@ const ProductPage = () => {
                                     {product.subTitle}
                                 </h2>
                                 <h6>
-                                    ${product.originalPrice}  <span>(Original Price)</span>
+                                    £{product.originalPrice}  <span>(Original Price)</span>
                                 </h6>
                                 <h5>
-                                    ${product.price}   <IoCheckmarkDone /> <br />
+                                    £{product.price}   <IoCheckmarkDone /> <br />
                                 </h5>
-                                <span className={styles.save}>SAVED ${parseInt(product?.originalPrice) - parseInt(product?.price)}</span>
+                                <span className={styles.save}>SAVED £{parseInt(product?.originalPrice) - parseInt(product?.price)}</span>
                                 <div className='mt-4'>
                                     <h4>Add Quantity</h4>
                                     <InputNumber className='w-full py-1' min={1} max={100000} defaultValue={1} onChange={(value) => setQtyToShop(value)} />

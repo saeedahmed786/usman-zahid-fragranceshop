@@ -64,7 +64,7 @@ const Orders = () => {
                                                                     Order #{index + 1}
                                                                 </td>
                                                                 <td>
-                                                                    Total Price : £{order?.products?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0)}
+                                                                    Total Price : £{order?.totalPrice}
                                                                 </td>
                                                                 <td>
                                                                     Status: &nbsp;
@@ -118,7 +118,7 @@ const Orders = () => {
                                                                                 {product?.title}
                                                                             </th>
                                                                             <th>Qty:{product?.qtyToShop}</th>
-                                                                            <th>£ {parseInt(product?.price * product?.qtyToShop)}</th>
+                                                                            <th>£{parseInt(product?.price * product?.qtyToShop)}</th>
                                                                         </tr>
                                                                     )
                                                                 })

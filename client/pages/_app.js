@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>My Shop</title>
+                <title>Perfume Price</title>
             </Head>
             <CartProvider>
                 <DiscountModal />

@@ -1,6 +1,7 @@
 import React from 'react'
-import defaImg from "../../../public/assets/sale.webp";
-import offImage from "../../../public/assets/headeroff.svg";
+import offImage from "../../../public/assets/Screenshot_20240629_015301_Chrome.jpg";
+import image2 from "../../../public/assets/Screenshot_20240629_015135_Chrome.jpg";
+import image3 from "../../../public/assets/Screenshot_20240629_015347_Chrome.jpg";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -51,7 +52,7 @@ const Header = () => {
         <SwiperSlide className={styles.swiperSlide}>
           <Row gutter={[23, 23]} align="middle">
             <Col xs={24} md={12} className={styles.left}>
-              <Image src={defaImg} />
+              <Image src={image2} />
             </Col>
             <Col xs={24} md={12}>
               <h2>Hermes</h2>
@@ -67,7 +68,7 @@ const Header = () => {
         <SwiperSlide className={styles.swiperSlide}>
           <Row gutter={[23, 23]} align="middle">
             <Col xs={24} md={12} className={styles.left}>
-              <Image src={defaImg} />
+              <Image src={image3} />
             </Col>
             <Col xs={24} md={12}>
               <h2>Hermes</h2>

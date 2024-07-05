@@ -48,9 +48,6 @@ const Footer = () => {
                                     <Link href="/about-us">About Us</Link>
                                 </li>
                                 <li className={"text-[#A7ADBA]  text-[12px] font-[400]"}>
-                                    <Link href="/">Rozaliss</Link>
-                                </li>
-                                <li className={"text-[#A7ADBA]  text-[12px] font-[400]"}>
                                     <Link href="/terms-and-conditions">Terms and Conditions</Link>
                                 </li>
                                 <li className={"text-[#A7ADBA]  text-[12px] font-[400]"}>
@@ -61,14 +58,14 @@ const Footer = () => {
                         <Col xs={24} md={8} lg={6} className="text-start">
                             <h2 className={"text-white font-[700] text-[16px] leading-[24px]"}>Contact Us</h2>
                             <div className={"text-start flex flex-col gap-3 mt-[16px] md__custom:items-center"}>
-                                <a href="mailto:shop@gmail.com ">
+                                <a href="mailto:helpperfumeprice@gmail.com">
                                     <div className={"flex items-center gap-2"}>
                                         <button className={"hover:opacity-90 p-[7px] bg-transparent w-[24px] h-[24px] rounded-full border border-white flex items-center justify-center"} type={"button"}>
                                             <span className={"text-[10px] text-white"}>
                                                 <BsEnvelope />
                                             </span>
                                         </button>
-                                        <p className={"text-[#A7ADBA]  text-[12px] font-[400] tracking-wide"}>shop@gmail.com</p>
+                                        <p className={"text-[#A7ADBA]  text-[12px] font-[400] tracking-wide"}>helpperfumeprice@gmail.com</p>
                                     </div>
                                 </a>
                                 <a href="tel: +213543823124">
