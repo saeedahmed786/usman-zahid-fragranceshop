@@ -138,7 +138,7 @@ const Products = () => {
         <div className={styles.products}>
             <Head>
                 <meta charSet="utf-8" />
-                <title>Shop | High-Quality Fragrances for Men and Women</title>
+                <title>Perfume Price | High-Quality Fragrances for Men and Women</title>
                 <link rel="canonical" href="https://ecomm-shop.vercel.app/" />
                 <meta name="robots" content="index, follow" />
                 <meta name="description" content="Discover a vast selection of high-quality perfumes, aftershaves, and colognes for men and women at Perfume Price. Featuring top brands like Dior, Versace, and more." />

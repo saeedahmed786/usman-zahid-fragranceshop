@@ -22,7 +22,6 @@ const CheckoutPage = () => {
   const [clientSecret, setClientSecret] = useState("");
   const [address, setAddress] = useState({});
   const [showPayment, setShowPayment] = useState(false);
-  const [orders, setOrders] = useState([]);
   const { cart, clearCart } = useCart();
   const [isFirstOrder, setIsFirstOrder] = useState(false);
 
@@ -86,7 +85,6 @@ const CheckoutPage = () => {
         }
       }).then(res => {
         if (res.status === 200) {
-          setOrders(res.data);
           setIsFirstOrder(res.data.length === 0); // Check if it's the first order
         }
         else {

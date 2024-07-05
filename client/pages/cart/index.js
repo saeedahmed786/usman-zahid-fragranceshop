@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./cart.module.css";
 import { useCart } from "@/context";
 import Image from "next/image";
-import { Col, Input, InputNumber, Modal, Row } from "antd";
-import { ErrorAlert } from "@/components/Commons/Messages/Messages";
-import { isAuthenticated } from "@/components/Commons/Auth/Auth";
+import { Col, InputNumber, Row } from "antd";
 import { DeleteFilled } from "@ant-design/icons";
 import { ButtonComp } from "@/components/Commons/ButtonComp/ButtonComp";
 import { useRouter } from "next/router";
-
-const { Search } = Input;
 
 const CartPage = () => {
   const router = useRouter();
