@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', AuthenticatorJWT, isAdmin, getAllUsers);
 router.get('/get/:id', getUserById);
-router.post('/signup', upload.single('file'), SignUp);
+router.post('/signup', SignUp);
 router.post('/admin/add-user', addUserByAdmin);
 router.post('/login', Login);
 router.post('/admin/login', adminLogin);

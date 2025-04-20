@@ -34,6 +34,7 @@ exports.getUserById = async (req, res) => {
 }
 
 exports.SignUp = async (req, res) => {
+    console.log(req.body);
     try {
         const ifEmailAlreadyPresent = await User.findOne({ email: req.body.email });
         if (ifEmailAlreadyPresent) {
@@ -76,7 +77,7 @@ exports.Login = async (req, res) => {
                         role: findUser.role
                     }
                 }
-                jwt.sign(payload, config.JWT_SECRET, (err, token) => {
+                jwt.sign(payload, config.jwtSecret, (err, token) => {
                     if (err) res.status(400).json({ errorMessage: 'Jwt Error' })
                     else {
                         delete findUser["password"];
@@ -118,7 +119,7 @@ exports.adminLogin = async (req, res) => {
                         role: findUser.role
                     }
                 }
-                jwt.sign(payload, config.JWT_SECRET, (err, token) => {
+                jwt.sign(payload, config.jwtSecret, (err, token) => {
                     if (err) res.status(400).json({ errorMessage: 'Jwt Error' })
 
                     const {
@@ -296,7 +297,7 @@ exports.resetPasswordLink = async (req, res) => {
                     if (result) {
                         let url = '';
                         if (process.env.NODE_ENV === 'production') {
-                            url = `https://Perfume Price.com/reset-password/${token}` // The url of the domain on which you are hosting your frontend in production mode to serve the reset-password link page by sending this link to the email
+                            url = `https://Fragrance Shop.com/reset-password/${token}` // The url of the domain on which you are hosting your frontend in production mode to serve the reset-password link page by sending this link to the email
                         } else {
                             url = `http://localhost:3000/reset-password/${token}`  // The url of the frontend in developement mode to serve the reset-password link page on the frontend by sending this link to the email
                         }

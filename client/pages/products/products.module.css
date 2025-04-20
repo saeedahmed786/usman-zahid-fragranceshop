@@ -7,16 +7,16 @@
 }
 
 .products .top h1 {
-    margin-bottom: 19px;
+    margin-bottom: 0px;
     font-size: 60px;
     font-weight: bold;
-    /* text-align: center; */
+    text-align: center;
 }
 
 .products .top p {
     margin-bottom: 32px;
     font-size: 17px;
-    /* text-align: center; */
+    text-align: center;
 }
 
 .products .scroll {
@@ -27,8 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 23px;
+    gap: 10px;
     padding: 40px;
     border-bottom: 1px solid #dadada;
     padding-bottom: 23px;
@@ -88,23 +87,4 @@
 
 .products .filters .filterSection .select span:last-of-type {
     margin-top: -11px !important;
-}
-
-
-@media (max-width: 700px) {
-
-    .products .top h1,
-    .products .top p {
-        text-align: left;
-    }
-
-    .products .top,
-    .products .sortSection,
-    .products .filterSection {
-        padding: 17px !important;
-    }
-
-    .products .filterSection {
-        margin-top: 23px;
-    }
 }

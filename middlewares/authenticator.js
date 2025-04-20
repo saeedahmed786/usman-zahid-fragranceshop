@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config/keys');
+const { jwtSecret } = require('../config/keys');
 
 AuthenticatorJWT = (req, res, next) => {
     const tokenWithBearer = req.headers?.authorization;
@@ -8,7 +8,7 @@ AuthenticatorJWT = (req, res, next) => {
         res.status(404).json({ errorMessage: 'No token. Access Denied' });
     }
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, jwtSecret);
         req.user = decoded.user;
         next();
  

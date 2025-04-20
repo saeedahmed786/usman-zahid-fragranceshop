@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 :root {
-  --main-body-bg-color: #ffffff;
-  --main-bg-color: #232f3e;
+  --main-body-bg-color: #E9EFEF;
+  --main-bg-color: #083652;
   --main-bg-dark-color: #041b29;
   --main-hover-color: #041b29;
   --main-text-color: #000;
@@ -18,10 +18,6 @@ html {
   padding: 0px !important;
   margin: 0px !important;
   overflow-x: hidden !important;
-}
-
-h1 {
-  line-height: 100% !important;
 }
 
 .ant-checkbox-inner {
@@ -51,10 +47,6 @@ h1 {
   width: 100%;
 }
 
-.ant-popconfirm-buttons .ant-btn-primary {
-  width: auto !important;
-}
-
 .swiper-pagination {
   position: relative !important;
 }
@@ -80,28 +72,4 @@ h1 {
 .swiper-button-next::after {
   font-size: 21px !important;
   font-weight: bold !important;
-}
-
-.adminOrderProducts th {
-  padding: 32px;
-}
-
-.table-container {
-  overflow-x: auto !important;
-}
-
-.anticon {
-  cursor: pointer !important;
-}
-
-.carousel .thumbs-wrapper {
-  overflow-x: auto !important;
-}
-
-.navDrawer {
-  width: max-content !important;
-}
-
-.navDrawer .ant-drawer-body {
-  padding: 10px !important;
 }

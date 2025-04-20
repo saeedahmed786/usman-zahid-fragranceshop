@@ -56,12 +56,28 @@ const Template = (
                 <p style="margin-bottom: 23px;">Hi ${name}, 
                 ${orderStatus ? `Your Order is ${orderStatus}!` : "we’re getting your order ready to be delivered!"}
                 </p>
+    
+                <h6>✈️ Delivery Process:</h6>
+                <div>1️⃣ Click the chat icon on the lower right of our home page</div>
+                <div>2️⃣ Message us your Order Number and Dodo Code™️</div>
+                <div> 3️⃣ Wait for the delivery staff to arrive and drop your order</div>
+                <div>⚠️ Dodo Code™️ will be provided for villager and island orders</div>
+    
                 <div class="btn" style="margin: 43px 0px;">
-                    <a href="http://localhost:3000/account/orders" target="_blank">View Your Order</a>
-                </div>    
+                    <a href="http://localhost:3000/profile" target="_blank">View Your Order</a>
+                </div>
+    
+                Order summary
+    
                 <footer>
+                If you have any questions, contact our 24/7 Live Support by clicking the Chat Icon on the lower
+                right of our
+                page
                 <div class="bottom">
-                    <h2>Perfume Price</h2>
+                    <h2>Fragrance Shop</h2>
+                    <p>
+                        <div>See our 2,370 reviews on Trustpilot</div>
+                    </p>
                 </div>
             </footer>
             </div>

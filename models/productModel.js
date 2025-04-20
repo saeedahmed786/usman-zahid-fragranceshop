@@ -40,11 +40,6 @@ const productShema = new mongoose.Schema({
     subCategory: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        required: false
-    },
-    brand: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Brand',
     },
     qty: {
         type: Number,

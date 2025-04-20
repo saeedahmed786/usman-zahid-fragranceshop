@@ -1,7 +1,6 @@
 import React from 'react'
-import offImage from "../../../public/assets/Screenshot_20240629_015301_Chrome.jpg";
-import image2 from "../../../public/assets/Screenshot_20240629_015135_Chrome.jpg";
-import image3 from "../../../public/assets/Screenshot_20240629_015347_Chrome.jpg";
+import defaImg from "../../../public/assets/sale.webp";
+import offImage from "../../../public/assets/headeroff.jpeg";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -28,7 +27,6 @@ const Header = () => {
         pagination={{
           clickable: true,
         }}
-        className={styles.swiper}
         modules={[Pagination, Navigation]}
       >
         <SwiperSlide className={styles.swiperSlide}>
@@ -52,7 +50,7 @@ const Header = () => {
         <SwiperSlide className={styles.swiperSlide}>
           <Row gutter={[23, 23]} align="middle">
             <Col xs={24} md={12} className={styles.left}>
-              <Image src={image2} />
+              <Image src={defaImg} />
             </Col>
             <Col xs={24} md={12}>
               <h2>Hermes</h2>
@@ -68,7 +66,7 @@ const Header = () => {
         <SwiperSlide className={styles.swiperSlide}>
           <Row gutter={[23, 23]} align="middle">
             <Col xs={24} md={12} className={styles.left}>
-              <Image src={image3} />
+              <Image src={defaImg} />
             </Col>
             <Col xs={24} md={12}>
               <h2>Hermes</h2>

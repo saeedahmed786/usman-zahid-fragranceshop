@@ -20,7 +20,7 @@ export const CreateMainCategories = ({ updateFunction }) => {
     });
   }
 
-  
+  console.log(formData);
 
   const showModal = () => {
     setIsModalVisible(true);

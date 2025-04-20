@@ -1,28 +1,28 @@
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { DeleteOutlined, RightOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import moment from 'moment'
 import { ErrorAlert, SuccessAlert } from '@/components/Commons/Messages/Messages'
 import DeleteModal from '@/components/DeleteModal'
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
+import { isAuthenticated } from '@/components/Commons/Auth/Auth'
 
 const Users = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
+    const [userAuth, setUserAuth] = useState({});
     const [current, setCurrent] = useState(1);
     const [totalUsers, setTotalUsers] = useState();
 
     const getAllUsers = async (curr) => {
-        setLoading(true);
         await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users`, {
             headers: {
                 authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(res => {
-            setLoading(false);
             if (res.statusText === "OK") {
                 setUsers(res.data);
                 setTotalUsers(res.data.count);
@@ -37,6 +37,7 @@ const Users = () => {
     }
 
     useEffect(() => {
+        setUserAuth(isAuthenticated());
         getAllUsers(current);
         return () => {
         }
@@ -56,6 +57,7 @@ const Users = () => {
                 ErrorAlert(res.data.errorMessage)
             }
         }).catch(err => {
+            setLoading(false);
             console.log(err)
             ErrorAlert(err?.message);
         })
@@ -137,7 +139,7 @@ const Users = () => {
                     </div>
                 </div>
                 <div className='hidden md:block bg-white'>
-                    <Table loading={loading} showSorterTooltip columns={columns} pagination={false} dataSource={users} />
+                    <Table showSorterTooltip columns={columns} pagination={false} dataSource={users} />
                 </div>
             </div>
         </AdminLayout>

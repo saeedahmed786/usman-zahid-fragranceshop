@@ -30,14 +30,7 @@ const Signup = () => {
         })
     };
 
-    useEffect(() => {
-        if (localStorage.getItem("email")) {
-            form.setFieldsValue({ email: localStorage.getItem("email") })
-        }
-        return () => {
 
-        }
-    }, [])
 
     return (
         <div className={styles.auth}>

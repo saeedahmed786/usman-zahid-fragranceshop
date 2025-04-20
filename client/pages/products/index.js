@@ -1,14 +1,13 @@
 import { MainProductCard } from '@/components/Commons/MainProductCard/MainProductCard';
 import { ErrorAlert } from '@/components/Commons/Messages/Messages';
-import { Col, Pagination, Row, Select } from 'antd';
+import { Col, Row, Select } from 'antd';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styles from './products.module.css';
+import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from '@/components/Commons/Loading/Loading';
-import { ButtonComp } from '@/components/Commons/ButtonComp/ButtonComp';
-import Head from 'next/head';
 
 
 const Products = () => {
@@ -16,90 +15,52 @@ const Products = () => {
     const [productsArray, setProductsArray] = useState([]);
     const [sortValue, setSortValue] = useState("");
     const [categories, setCategories] = useState([]);
-    const [brands, setBrands] = useState([]);
-    const [category, setCategory] = useState(router.query.category);
-    const [brand, setBrand] = useState(router.query.brand);
-    const [priceRange, setPriceRange] = useState();
     const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
     const [totalCount, setTotalCount] = useState();
-    const [current, setCurrent] = useState(1);
-    const [gender, setGender] = useState("");
+    const [index, setIndex] = useState(0);
 
-    const getAllData = async () => {
+    const getAllData = async (e) => {
         setLoading(true);
-        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { category, priceRange, gender, brand }).then(res => {
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${index}`).then(async (res) => {
             setLoading(false);
             if (res.status === 200) {
-                setProductsArray(res.data?.products);
+                setProductsArray((prevItems) => [...prevItems, ...res.data?.products]);
                 setTotalCount(res.data.count)
+                res.data?.products?.length > 0 ? setHasMore(true) : setHasMore(false);
             }
             else {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
-            setLoading(true);
             console.log(err)
         });
+        setIndex((prevIndex) => prevIndex + 1);
     }
 
-    const getAllSubCategories = async () => {
+    const getAllSubCategories = async (e) => {
         setLoading(true);
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then((res) => {
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/sub-categories`).then(async (res) => {
             setLoading(false);
             if (res.status === 200) {
-                setCategories(res.data?.map(f => ({ value: f?._id, label: `${f?.parentId?.name} ${f?.name}` })));
+                setCategories(res.data?.map(f => ({ value: f?._id, label: f?.name })));
             }
             else {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
-            setLoading(true);
             console.log(err)
         })
     }
-
-    const getAllBrands = async () => {
-        setLoading(true);
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/brands/get`).then((res) => {
-            setLoading(false);
-            if (res.status === 200) {
-                setBrands(res.data?.map(f => ({ value: f?._id, label: f?.name })));
-            }
-            else {
-                ErrorAlert(res.data.errorMessage);
-            }
-        }).catch(err => {
-            setLoading(true);
-            console.log(err)
-        })
-    }
-
-    useEffect(() => {
-        getAllSubCategories();
-        getAllBrands();
-        if (router.query?.category) {
-            setCategory(router.query?.category)
-        }
-        if (router.query?.gender) {
-            setGender(router.query?.gender)
-        }
-        if (router.query?.brand) {
-            setBrand(router.query?.brand)
-        }
-        return () => {
-
-        }
-    }, [router.query]);
 
     useEffect(() => {
         getAllData();
+        getAllSubCategories();
 
         return () => {
 
         }
-    }, [current, category, priceRange, gender, brand]);
-
-
+    }, []);
 
     const sortProducts = (products, sortBy) => {
         switch (sortBy) {
@@ -127,33 +88,9 @@ const Products = () => {
         }
     };
 
-    const handleResetFilters = () => {
-        setCategory("");
-        setPriceRange("");
-        setGender("");
-        router.push("/products");
-    };
 
     return (
         <div className={styles.products}>
-            <Head>
-                <meta charSet="utf-8" />
-                <title>Perfume Price | High-Quality Fragrances for Men and Women</title>
-                <link rel="canonical" href="https://ecomm-shop.vercel.app/" />
-                <meta name="robots" content="index, follow" />
-                <meta name="description" content="Discover a vast selection of high-quality perfumes, aftershaves, and colognes for men and women at Perfume Price. Featuring top brands like Dior, Versace, and more." />
-                <meta name="keywords" content="perfumes, aftershaves, colognes, fragrances, men's fragrances, women's fragrances, Dior, Versace, Rabanne, high-quality perfumes, cheap perfume, fragrance offers, fragrance quiz, online quiz, fragrance match" />
-                <meta name="author" content="Saeed Ahmed Chachar" />
-                <meta property="og:title" content="Perfume Price | High-Quality Fragrances for Men and Women" />
-                <meta property="og:type" content="website" />
-                <meta property="og:description" content="Shop at Perfume Price for a wide range of perfumes and aftershaves from top brands. Enjoy great offers and exceptional customer service." />
-                <meta property="og:image" content="/public/assets/new.webp" />
-                <meta property="og:url" content="https://ecomm-shop.vercel.app" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Perfume Price | High-Quality Fragrances for Men and Women" />
-                <meta name="twitter:description" content="Discover a wide range of perfumes, aftershaves, and colognes at Perfume Price. Featuring top brands and great offers." />
-                <meta name="twitter:image" content="/public/assets/new.webp" />
-            </Head>
             <div className={styles.top}>
                 <h1>All Products</h1>
                 <p>has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
@@ -178,13 +115,10 @@ const Products = () => {
                 <div className={styles.filterSection}>
                     <Row gutter={[23, 23]}>
                         <Col xs={12} md={8} lg={6}>
-                            <Select allowClear className={styles.select} value={category} onChange={(val) => setCategory(val)} placeholder="Categories" options={categories} />
+                            <Select className={styles.select} placeholder="Brand" options={categories} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select allowClear className={styles.select} value={brand} onChange={(val) => setBrand(val)} placeholder="Brands" options={brands} />
-                        </Col>
-                        <Col xs={12} md={8} lg={6}>
-                            <Select allowClear className={styles.select} value={priceRange} onChange={(val) => setPriceRange(val)} placeholder="Price" options={[
+                            <Select className={styles.select} placeholder="Price" options={[
                                 { value: "0-10", label: "$0 - $10" },
                                 { value: "10-20", label: "$10 - $20" },
                                 { value: "20-50", label: "$20 - $50" },
@@ -194,53 +128,45 @@ const Products = () => {
                             ]} />
                         </Col>
                         <Col xs={12} md={8} lg={6}>
-                            <Select allowClear className={styles.select} value={gender} placeholder="Gender" onChange={(val) => setGender(val)} options={[
-                                { value: "male", label: "Male" },
-                                { value: "female", label: "Female" },
-                                { value: "others", label: "Others" }
+                            <Select className={styles.select} placeholder="Size (ml)" options={[
+                                { value: "125", label: "125ml" },
+                                { value: "100", label: "100ml" },
+                                { value: "90", label: "90ml" },
+                                { value: "80", label: "80ml" },
+                                { value: "70", label: "70ml" },
+                                { value: "60", label: "60ml" }
                             ]} />
                         </Col>
-                        {/* <Col xs={12} md={8} lg={6}>
+                        <Col xs={12} md={8} lg={6}>
                             <Select className={styles.select} placeholder="Gift Set" options={[
                                 { value: "yes", label: "Yes" },
-                                { value: "no", label: "No" }
+                                { value: "noe", label: "No" }
                             ]} />
-                        </Col> */}
-                        <Col xs={24} md={8} lg={6}>
-                            <div className='md:max-w-[200px]'>
-                                <ButtonComp text="Reset All Filters" onClick={handleResetFilters} />
-                            </div>
                         </Col>
                     </Row>
                 </div>
             </div>
-            {
-                loading ?
-                    <Loading />
-                    :
-                    <Row gutter={[23, 23]} className="p-4">
-
-                        {
-                            productsArray?.length > 0 ?
-                                productsArray?.map((product, index) => {
-                                    return (
-                                        <Col xs={12} md={8} lg={6} key={index}>
-                                            <Link href={`/product/${product?._id}`}>
-                                                <MainProductCard product={product} />
-                                            </Link>
-                                        </Col>
-                                    )
-                                })
-                                :
-                                <Col xs={24} className="text-center">
-                                    <h3 className='text-[36px] font-bold'>No Products Found!</h3>
+            <InfiniteScroll
+                dataLength={productsArray.length}
+                className={styles.scroll}
+                next={getAllData}
+                hasMore={hasMore}
+                loader={<Loading />}
+            >
+                <Row gutter={[23, 23]} className="p-4">
+                    {
+                        productsArray?.map((product, index) => {
+                            return (
+                                <Col xs={24} md={8} lg={6} key={index}>
+                                    <Link href={`/product/${product?._id}`}>
+                                        <MainProductCard product={product} />
+                                    </Link>
                                 </Col>
-                        }
-                    </Row>
-            }
-            <div className='flex justify-center my-10'>
-                <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />
-            </div>
+                            )
+                        })
+                    }
+                </Row>
+            </InfiniteScroll>
         </div >
     )
 }

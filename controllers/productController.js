@@ -18,39 +18,12 @@ exports.getAllProducts = async (req, res) => {
 
 exports.getLimitedProducts = async (req, res) => {
   try {
-    let minPrice;
-    let maxPrice;
-    if (req.body.priceRange) {
-      minPrice = req.body.priceRange?.split("-")[0];
-      maxPrice = req.body.priceRange?.split("-")[1];
-    } else {
-      minPrice = 0
-      maxPrice = 30000
-    }
-
-    let query = {};
-
-    if (req.body.category) {
-      query.subCategory = req.body.category;
-    }
-
-    if (req.body.brand) {
-      query.brand = req.body.brand;
-    }
-
-    if (req.body.gender) {
-      query.gender = { $regex: new RegExp(req.body.gender, 'i') }
-    }
-
-    if (minPrice && maxPrice) {
-      query.price = { $gte: minPrice, $lte: maxPrice }; // Filter by price range
-    }
-
     const PAGE_SIZE = 20;
     const page = parseInt(req.params.page || "0")
-    const products = await Product.find(query).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
-      .populate('mainCategory subCategory brand').sort({ createdAt: -1 }).exec();
+    const products = await Product.find().limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+      .populate('seller mainCategory subCategory').sort({ createdAt: -1 }).exec();
     const count = await Product.countDocuments({});
+    console.log(products);
     if (products) {
       res.status(200).send({ products, count });
     } else {
@@ -62,9 +35,28 @@ exports.getLimitedProducts = async (req, res) => {
   }
 }
 
+exports.getSellerLimitedProducts = async (req, res) => {
+  const PAGE_SIZE = 20;
+  const page = parseInt(req.params.page || "0")
+  console.log(req.params)
+  const products = await Product.find({ seller: req.params.id }).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+    .populate('seller').exec();
+  const count = await Product.countDocuments({});
+  try {
+    if (products) {
+      res.status(200).send({ products, count });
+    } else {
+      res.status(404).json({ errorMessage: 'No Products found!' });
+    }
+  } catch (error) {
+    res.status(404).json({ errorMessage: 'Error in finding products', error });
+  }
+}
+
+
 exports.getFeaturedProducts = async (req, res) => {
-  const products = await Product.find({ featured: "yes" }).limit(20).sort({ "createdAt": '-1' })
-    .populate('mainCategory subCategory brand').exec();
+  const products = await Product.find({ featured: true }).limit(20).sort({ "createdAt": '-1' })
+    .populate('seller').exec();
   try {
     if (products) {
       res.status(200).send(products);
@@ -79,8 +71,8 @@ exports.getFeaturedProducts = async (req, res) => {
 
 exports.getAllAdminProducts = async (req, res) => {
   try {
-    const products = await Product.find()
-      .populate('mainCategory subCategory brand').exec();
+    const products = await Product.find({ user: req.params.id })
+      .populate('seller').exec();
     if (products) {
       res.status(200).send(products);
     } else {
@@ -106,13 +98,31 @@ exports.getProductById = async (req, res) => {
   }
 }
 
-exports.searchProducts = async (req, res) => {
+exports.getProductByMultipleFilters = async (req, res) => {
   try {
-    const findProducts = await Product.find({ $or: [{ title: { $regex: new RegExp(req.body.title, 'i') } }, { subTitle: { $regex: new RegExp(req.body.title, 'i') } }] })
-      .populate('mainCategory subCategory brand')
+    console.log(req.body);
+    let query = {};
+
+    if (req.body.query) {
+      query.title = { $regex: `.*${req.body.query}.*`, $options: 'i' };
+    }
+    if (req.body.subject) {
+      query.subject = req.body.subject;
+    }
+    if (req.body.color) {
+      query.color = req.body.color;
+    }
+    if (req.body.tags) {
+      query.style = req.body.tags;
+    }
+
+    const findProduct = await Product.find(query)
+      .limit(20)
+      .populate('seller')
       .exec();
-    if (findProducts) {
-      res.status(200).json(findProducts);
+
+    if (findProduct && findProduct.length > 0) {
+      res.status(200).json(findProduct);
     } else {
       res.status(404).json({ errorMessage: 'No products found' });
     }
@@ -122,34 +132,40 @@ exports.searchProducts = async (req, res) => {
 };
 
 
-exports.filterProducts = async (req, res) => {
+exports.getProductByOneParameter = async (req, res) => {
   try {
+    console.log("body", req.body);
     let minPrice;
     let maxPrice;
-    if (req.body.priceRange) {
-      minPrice = req.body.priceRange?.split("-")[0];
-      maxPrice = req.body.priceRange?.split("-")[1];
+    if (req.body.priceRange?.length > 0) {
+      minPrice = req.body.priceRange[0];
+      maxPrice = req.body.priceRange[1];
     } else {
       minPrice = 0
-      maxPrice = 30000
+      maxPrice = 3000
     }
 
     let query = {};
 
-    if (req.body.category) {
-      query.subCategory = req.body.category;
+    if (req.body.par) {
+      query.$or = [
+        { subject: req.body.par },
+        { color: req.body.par },
+        { tags: req.body.par },
+      ];
+    }
+
+    if (req.body.seller) {
+      query.seller = req.body.seller;
     }
 
     if (minPrice && maxPrice) {
       query.price = { $gte: minPrice, $lte: maxPrice }; // Filter by price range
     }
 
-    const PAGE_SIZE = 20;
-    const page = parseInt(req.params.page || "0")
-
     const findProducts = await Product.find(query)
-      .limit(PAGE_SIZE).skip(PAGE_SIZE * page)
-      .populate('mainCategory subCategory brand').exec();
+      .limit(20)
+      .populate('seller').exec();
     if (findProducts) {
       res.status(200).json(findProducts);
     } else {
@@ -158,6 +174,76 @@ exports.filterProducts = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
+  }
+}
+
+exports.getSellerProductByOneParameter = async (req, res) => {
+  let minPrice;
+  let maxPrice;
+  if (req.body.priceRange?.length > 0) {
+    minPrice = req.body.priceRange[0];
+    maxPrice = req.body.priceRange[1];
+  } else {
+    minPrice = 0
+    maxPrice = 3000
+  }
+
+  let query = {
+    seller: req.user._id, // Filter by seller
+  };
+
+  if (req.body.par) {
+    query.$or = [
+      { subject: req.body.par },
+      { color: req.body.par },
+      { tags: req.body.par },
+    ];
+  }
+
+  if (req.body.seller) {
+    query.seller = req.user._id;
+  }
+
+  if (minPrice && maxPrice) {
+    query.price = { $gte: minPrice, $lte: maxPrice }; // Filter by price range
+  }
+
+  const findProducts = await Product.find(query)
+    .limit(20)
+    .populate('seller').exec();
+  if (findProducts) {
+    res.status(200).json(findProducts);
+  } else {
+    res.json({ errorMessage: 'No products found' })
+  }
+}
+
+exports.getFilteredProductsCount = async (req, res) => {
+  let searchBy = req.params.id;
+  let query = {};
+  console.log(req.body.field)
+
+  if (req.body.field === "subject") {
+    query = { subject: searchBy };
+  } else if (req.body.field === "color") {
+    query = { color: searchBy };
+  } else if (req.body.field === "style") {
+    query = { tags: searchBy };
+  } else {
+    console.log("invalid")
+    return res.json({ errorMessage: 'Invalid field' });
+  }
+
+  try {
+    const count = await Product.countDocuments(query);
+    if (count) {
+      res.status(200).json({ count });
+    } else {
+      res.status(200).json({ count: 0 });
+    }
+
+  } catch (error) {
+
   }
 }
 
@@ -178,7 +264,6 @@ exports.uploadProduct = async (req, res) => {
       featured: req.body.featured,
       mainCategory: req.body.mainCategory,
       subCategory: req.body.subCategory,
-      brand: req.body.brand,
       pictures: req.body.pictures
     });
 
@@ -211,7 +296,6 @@ exports.updateProduct = async (req, res) => {
       findProduct.featured = req.body.featured;
       findProduct.mainCategory = req.body.mainCategory;
       findProduct.subCategory = req.body.subCategory;
-      findProduct.brand = req.body.brand;
       findProduct.pictures = req.body.pictures;
       findProduct.description = req.body.description;
 

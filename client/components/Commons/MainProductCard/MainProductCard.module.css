@@ -20,18 +20,9 @@
     color: black;
     margin: 6px 0px;
     font-size: 21px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .MainProductCard p {
     color: var(--main-bg-color);
     margin-bottom: 6px;
-}
-
-@media (max-width: 600px) {
-    .MainProductCard img {
-        height: 220px !important;
-    }
 }

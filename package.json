@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run dev --prefix client",
-    "dev": "concurrently \" npm run server \" \" npm run client \""
+    "dev": "concurrently \" npm run server \" \" npm run client \"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix client && npm run build --force --prefix client"
   },
   "homepage": "",
   "dependencies": {
@@ -17,6 +18,7 @@
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
@@ -25,6 +27,8 @@
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.13",
+    "react-toastify": "^9.1.3",
+    "socket.io": "^4.7.2",
     "stripe": "^10.17.0",
     "uuid": "^8.3.2"
   }

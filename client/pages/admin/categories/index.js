@@ -17,9 +17,7 @@ const Categories = () => {
   const [loading, setLoading] = useState(false);
 
   const getAllCategories = async () => {
-    setLoading(true);
     await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/categories/get`).then(res => {
-      setLoading(false);
       if (res.statusText === "OK") {
         setCategories(res.data);
         let formatIt = res.data.map(obj => {
@@ -63,6 +61,7 @@ const Categories = () => {
         ErrorAlert(res.data.errorMessage)
       }
     }).catch(err => {
+      setLoading(false);
       console.log(err)
       ErrorAlert(err?.message);
     })
@@ -126,7 +125,7 @@ const Categories = () => {
           </div>
         </div>
         {/* Show categories */}
-        <Table loading={loading} expandable={false} columns={columns} pagination={false} dataSource={categories} />
+        <Table expandable={false} columns={columns} pagination={false} dataSource={categories} />
       </div>
     </AdminLayout>
   )

@@ -1,4 +1,4 @@
-import { Button, Pagination, Table } from 'antd'
+import { Button, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
@@ -10,39 +10,40 @@ import DeleteModal from '@/components/DeleteModal'
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
 import { isAuthenticated } from '@/components/Commons/Auth/Auth'
 import Image from 'next/image'
-import Loading from '@/components/Commons/Loading/Loading'
 
 const Products = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
+    const [userAuth, setUserAuth] = useState({});
     const [current, setCurrent] = useState(1);
-    const [totalCount, setTotalCount] = useState();
+    const [totalProducts, setTotalProducts] = useState();
 
-    const getAllData = async () => {
-        setLoading(true);
-        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${current - 1}`, { ss: "" }).then(res => {
-            setLoading(false);
-            if (res.status === 200) {
-                setProducts(res.data?.products);
-                setTotalCount(res.data.count)
+    const getAllProducts = async (curr) => {
+        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get/${curr - 1}`, {
+            headers: {
+                authorization: 'Bearer ' + localStorage.getItem("token")
             }
-            else {
+        }).then(res => {
+            if (res.statusText === "OK") {
+                setProducts(res.data.products);
+                setTotalProducts(res.data.count);
+            } else {
                 ErrorAlert(res.data.errorMessage);
             }
         }).catch(err => {
+            setLoading(false);
             console.log(err)
-        });
+            ErrorAlert(err?.message);
+        })
     }
 
     useEffect(() => {
-        getAllData()
-
+        setUserAuth(isAuthenticated());
+        getAllProducts(current);
         return () => {
-
         }
-    }, [current])
-
+    }, []);
 
 
     const deleteHandler = async (id) => {
@@ -110,18 +111,7 @@ const Products = () => {
             ),
         },
         {
-            title: "Brand",
-            dataIndex: 'brand',
-            key: 'category',
-            sorter: (a, b) => a?.brand?.name?.localeCompare(b?.brand),
-            render: (_, { brand }) => (
-                <>
-                    <div className='text-[#0094DA] text-[12px] font-[500]'>{brand?.name}</div>
-                </>
-            ),
-        },
-        {
-            title: "Created Date",
+            title: "Date",
             dataIndex: 'createdAt',
             key: 'createdAt',
             sorter: (a, b) => a.createdAt.length - b.createdAt.length,
@@ -181,11 +171,12 @@ const Products = () => {
                     </div>
                 </div>
                 <div className='hidden md:block bg-white'>
-                    <Table loading={loading} showSorterTooltip columns={columns} pagination={false} dataSource={products} />
+                    <Table showSorterTooltip columns={columns} pagination={false} dataSource={products} />
                 </div>
-                <div className='flex justify-center my-10'>
-                    <Pagination current={current} onChange={(page) => setCurrent(page)} total={totalCount} />
-                </div>
+                {/* <div className='adminPagination bg-white p-4 flex items-center justify-between flex-wrap rounded-[16px] md:rounded-none my-1 md:my-12'>
+                    <p className='text-[#65737E] text-[12px]'>Affichage de {current * 10} sur {totalProducts}  entrées</p>
+                    <AdminPagination totalLength={totalProducts} handlePagination={(curr) => { setCurrent(curr); getAllProducts(curr) }} />
+                </div> */}
             </div>
         </AdminLayout>
     )

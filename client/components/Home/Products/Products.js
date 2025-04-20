@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from "./Products.module.css";
 import { Product } from '@/components/Commons/Product/Product';
 import Link from 'next/link';
-import { Navigation } from 'swiper/modules';
 
 const Products = ({ productsList }) => {
   return (
@@ -14,9 +13,6 @@ const Products = ({ productsList }) => {
         slidesPerView={1}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
-        navigation={true}
-        loop={true}
-        modules={[Navigation]}
         breakpoints={{
           640: {
             slidesPerView: 1,

@@ -10,7 +10,7 @@ header .left {
 }
 
 header .swiperSlide>div {
-    /* max-width: 1145px; */
+    max-width: 1145px;
     /* margin: 0px auto; */
     background-color: white !important;
 }
@@ -18,7 +18,7 @@ header .swiperSlide>div {
 header .swiperSlide img {
     width: 100%;
     height: 80vh;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 header .swiperSlide h2 {
@@ -29,14 +29,4 @@ header .swiperSlide h2 {
 
 header .swiperSlide p {
     font-size: 16px;
-}
-
-@media (max-width: 700px) {
-
-    header .swiper,
-    header .swiper .swiperSlide,
-    header .swiperSlide img {
-        height: 400px;
-        /* object-fit: cover; */
-    }
 }

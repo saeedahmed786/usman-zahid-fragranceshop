@@ -1,0 +1,47 @@
+.terms .links a{
+    color: #FCFFFF;
+    text-decoration: none;
+} 
+.terms p{
+    font-size: 14px;
+}
+
+.terms .see{
+    border: 1px solid #FCFFFF;
+    padding: 5px 30px;
+    font-size: 14px;
+    background-color: #0024FF;
+}
+.terms .div-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+.terms p{
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+.terms{
+    color: #FCFFFF;
+    padding-top: 20px;
+    padding-left: 170px;
+    padding-right: 170px;
+    padding-bottom: 60px;
+    font-family: 'Poppins', sans-serif;
+}
+.terms .headlist{
+    align-items: center;
+    justify-content: center;
+    font-family: "Playfair Display", serif !important;
+}
+.terms .links{
+    justify-content: center;
+    align-items: center;
+    color: #FCFFFF;
+    font-size: 12px;
+    }
+    @media (max-width:750px) {
+        .terms{
+            padding: 20px;
+        }
+    }

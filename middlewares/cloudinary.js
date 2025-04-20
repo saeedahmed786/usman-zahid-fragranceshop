@@ -2,23 +2,22 @@ const cloudinary = require('cloudinary');
 const config = require('../config/keys');
 
 cloudinary.config({
-    cloud_name: config.CLOUDINARY_CLOUD_NAME,
-    api_key: config.CLOUDINARY_API_KEY,
-    api_secret: config.CLOUDINARY_SECRET_KEY
+    cloud_name: config.cloudinary_cloud_name,
+    api_key: config.cloudinary_api_key,
+    api_secret: config.cloudinary_api_secret
 });
 
 exports.uploads = (file, folder) => {
     return new Promise(resolve => {
         cloudinary.uploader.upload(file, (result) => {
+            console.log(result);
             resolve({
                 url: result.secure_url,
                 id: result.public_id
             })
         }, {
             resource_type: "auto",
-            folder,
-            quality: "auto:best",
-            fetch_format: "auto",
+            folder
         })
     })
 }

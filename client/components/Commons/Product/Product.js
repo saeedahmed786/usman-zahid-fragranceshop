@@ -8,7 +8,7 @@ export const Product = ({ product }) => {
   const router = useRouter();
   return (
     <div className={styles.Product}>
-      <Image width={100} height={100} quality={100} src={product?.pictures[0]?.response?.url} />
+      <Image width={100} height={100} src={product?.pictures[0]?.response?.url} />
       <div>
         <h2>{product?.title}</h2>
         <div className='max-w-[200px] mx-[auto]'>

@@ -1,287 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./checkout.module.css";
 import { useCart } from "@/context";
-import { Col, Form, Input, Row } from "antd";
-import { ErrorAlert, SuccessAlert } from "@/components/Commons/Messages/Messages";
+import Image from "next/image";
+import { Col, Input, InputNumber, Modal, Row } from "antd";
+import { ErrorAlert } from "@/components/Commons/Messages/Messages";
+import { isAuthenticated } from "@/components/Commons/Auth/Auth";
+import { DeleteFilled } from "@ant-design/icons";
 import { ButtonComp } from "@/components/Commons/ButtonComp/ButtonComp";
 import { useRouter } from "next/router";
-import moment from "moment";
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import { StripeForm } from "@/components/Payments/StripeForm";
-import axios from "axios";
-import Loading from "@/components/Commons/Loading/Loading";
-import { isAuthenticated } from "@/components/Commons/Auth/Auth";
+
+const { Search } = Input;
 
 const CheckoutPage = () => {
-  const [form] = Form.useForm();
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [stripeLoading, setStripeLoading] = useState(false);
-  const [clientSecret, setClientSecret] = useState("");
-  const [address, setAddress] = useState({});
-  const [showPayment, setShowPayment] = useState(false);
-  const { cart, clearCart } = useCart();
-  const [isFirstOrder, setIsFirstOrder] = useState(false);
+  const { cart, removeFromCart, saveQtyToDb } = useCart();
 
-  const totalAmount = cart?.reduce((a, b) => a + parseInt(b?.price) * parseInt(b?.qtyToShop), 0);
-  const deliveryFee = totalAmount > 50 ? 0 : 3.95;
-
-  // Apply 10% discount if it's the user's first order
-  const discountedTotal = isFirstOrder ? totalAmount * 0.9 : totalAmount;
-
-  const transactionSuccess = async (data) => {
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/place-order`, { placed: moment().format("dddd, MMMM Do YYYY, h:mm:ss a"), totalPrice: discountedTotal + deliveryFee, user: isAuthenticated(), cartProducts: cart, address, paymentData: data }
-      , {
-        headers: {
-          'authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }
-    )
-      .then(res => {
-        console.log(res);
-        if (res.status === 200) {
-          clearCart();
-          SuccessAlert(res.data.successMessage);
-          setTimeout(() => {
-            router.push('/account/orders');
-          }, 2000);
-        } else {
-          ErrorAlert(res.data.errorMessage)
-        }
-      }).catch(err => {
-        setLoading(false);
-        console.log(err)
-        ErrorAlert(err?.message);
-      })
-  }
-
-  const createPaymentIntent = async (price) => {
-    if (price > 0) {
-      setStripeLoading(true);
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/create-payment-intent`, { totalPrice: price }, {
-        headers: {
-          'authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then((res) => {
-        setClientSecret(res.data.clientSecret);
-        setStripeLoading(false)
-      }).catch(err => {
-        setStripeLoading(false);
-        console.log(err)
-        ErrorAlert(err?.message);
-      })
-    } else {
-      // router.push("/cart");
-    }
-  }
-
-  const getAllOrders = async () => {
-    if (isAuthenticated() && isAuthenticated()?._id) {
-      await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders/customer/orders/${isAuthenticated()?._id}`, {
-        headers: {
-          'authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then(res => {
-        if (res.status === 200) {
-          setIsFirstOrder(res.data.length === 0); // Check if it's the first order
-        }
-        else {
-          ErrorAlert(res.data.errorMessage);
-        }
-      }).catch(err => {
-        console.log(err)
-        ErrorAlert(err?.message);
-      })
-    }
-  }
-
-  useEffect(() => {
-    getAllOrders();
-    if (cart?.length > 0) {
-      createPaymentIntent(discountedTotal + deliveryFee);
-    } else {
-      router.push("/cart");
-    }
-
-    return () => {
-
-    }
-  }, [cart, discountedTotal]);
-
-  const appearance = {
-    theme: 'stripe',
-  };
-
-  const options = {
-    clientSecret,
-    appearance,
-  }
-
-  const onFinish = (values) => {
-    setAddress(values);
-    setShowPayment(true);
-  }
 
   return (
-    <div className={styles.checkout}>
+    <div className={styles.checkout} data-aos="fade-right" data-aos-duration="1000">
       <h1 className={styles.title}>Checkout</h1>
+      {/* <h1 className={styles.title}>My Checkout</h1>
       <Row gutter={[23, 23]}>
         <Col xs={24} md={17}>
-          <div className="p-[17px] md:p-[40px]" style={{ maxWidth: 800 }}>
-            <div>
-              <h2 className="mb-8">Address Details: </h2>
-              <Form
-                layout="vertical"
-                form={form}
-                name="nest-messages"
-                className={styles.form}
-                onFinish={onFinish}
-              >
-                <Form.Item
-                  name="email"
-                  label="Email"
-                  rules={[
-                    {
-                      type: 'email',
-                      message: 'The input is not valid E-mail!',
-                    },
-                    {
-                      required: true,
-                      message: 'Please input your E-mail!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter email' />
-                </Form.Item>
-                <Form.Item
-                  name="fullName"
-                  label="Full Name"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your Full Name!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter Full Name' />
-                </Form.Item>
-                <Form.Item
-                  name="phone"
-                  label="Phone"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your Phone!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter Phone' />
-                </Form.Item>
-                <Form.Item
-                  name="postalCode"
-                  label="Postal Code"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your Postal Code!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter Postal Code' />
-                </Form.Item>
-                <Form.Item
-                  name="city"
-                  label="City"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your City!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter City' />
-                </Form.Item>
-                <Form.Item
-                  name="state"
-                  label="State"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your State!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter State' />
-                </Form.Item>
-                <Form.Item
-                  name="country"
-                  label="Country"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your Country!',
-                    },
-                  ]}
-                >
-                  <Input placeholder='Enter Country' />
-                </Form.Item>
-                <Form.Item className="mt-10">
-                  <ButtonComp type='submit' text="MAKE PAYMENT" loading={loading} disabled={loading} />
-                </Form.Item>
-              </Form>
-            </div>
+          <div className="p-[40px]">
             {
-              showPayment &&
-              (
-                <>
-                  <h2 className="text-[28px]">Please pay total amount of <b>£{discountedTotal.toFixed(2)}</b> to process your order.</h2>
-                  {
-                    stripeLoading ?
-                      <Loading />
-                      :
-                      clientSecret &&
-                      (
-                        <div>
-                          <Elements options={options} stripe={stripePromise}>
-                            <StripeForm totalPrice={parseInt(discountedTotal + deliveryFee)} placeOrder={transactionSuccess} />
-                          </Elements>
-                        </div>
-                      )
-                  }
-                </>
-              )
+              cart?.map((prod, index) => {
+                return (
+                  <div className={styles.item} key={index}>
+                    <div className={styles.crtimg}>
+                      <Image src={prod?.pictures[0]?.response?.url} width={100} height={100} alt={prod?.title} />
+                    </div>
+                    <div className="px-4">
+                      <h2>
+                        {prod?.title}
+                      </h2>
+                      <h3 className={styles.subTitle}>
+                        {prod?.subTitle}
+                      </h3>
+                      <button className="subj"> {prod?.subject}</button>
+                    </div>
+                    <div className={styles.qtyContainer}>
+                      <h4>Qty</h4>
+                      <div>
+                        <InputNumber min={1} max={100000} value={prod?.qtyToShop} onChange={(value) => saveQtyToDb(value, prod)} />
+                      </div>
+                    </div>
+                    <div className={styles.checkoutEnd}>
+                      <DeleteFilled className="text-[19px]" onClick={() => removeFromCart(prod?._id)} />
+                      <h6>${parseInt(prod?.price) * parseInt(prod?.qtyToShop)}</h6>
+                    </div>
+                  </div>
+                )
+              })
             }
           </div>
         </Col>
         <Col xs={24} md={7} className={styles.right}>
-          <div className="p-[17px] md:p-[40px] mb-10 md:mb-0">
+          <div className="p-[40px]">
+            <div className={styles.promotionCode}>
+              <h5>Promotion Code</h5>
+              <Search
+                placeholder="Enter Promotion Code"
+                allowClear
+                enterButton="Apply"
+                size="large"
+              />
+            </div>
             <h3>Order Details:</h3>
             <div className={styles.orderDetailItem}>
               <h5>Product Total</h5>
-              <h5>£{totalAmount}</h5>
-            </div>
-            {isFirstOrder && (
-              <div className={styles.orderDetailItem}>
-                <h5>First Order Discount (10%)</h5>
-                <h5>-£{(totalAmount * 0.1).toFixed(2)}</h5>
-              </div>
-            )}
-            <div className={styles.orderDetailItem}>
-              <h5>Delivery Fee</h5>
-              <h5>£{deliveryFee}</h5>
+              <h5>£{cart?.reduce((a, b) => a + b?.price, 0)}</h5>
             </div>
             <div className={styles.orderDetailItem}>
               <h5>Order Total <br /> <span>(excluding delivery)</span> </h5>
-              <h5>£{(discountedTotal + deliveryFee).toFixed(2)}</h5>
+              <h5>£{cart?.reduce((a, b) => a + b?.price, 0)}</h5>
             </div>
             <div>
-              <ButtonComp text="BACK" onClick={() => router.push("/cart")} />
+              <ButtonComp text="SECURE CHECKOUT" onClick={() => router.push("/checkout")} />
             </div>
           </div>
         </Col>
-      </Row>
+      </Row> */}
     </div >
   );
 };

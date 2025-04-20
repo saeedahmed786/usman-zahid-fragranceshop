@@ -4,12 +4,10 @@ const cloudinaryCon = require('../middlewares/cloudinary');
 function getAllCategoriesFunction(categories, parentId = null) {
     const categoryList = [];
     let category;
-
-    // Handling both undefined and null for parentId
     if (parentId == null) {
-        category = categories.filter(cat => !cat.parentId);
+        category = categories.filter(cat => cat.parentId == undefined);
     } else {
-        category = categories.filter(cat => cat.parentId && cat.parentId.toString() === parentId.toString());
+        category = categories.filter(cat => cat.parentId == parentId);
     }
 
     for (let cate of category) {
@@ -19,28 +17,30 @@ function getAllCategoriesFunction(categories, parentId = null) {
             picture: cate.picture,
             parentId: cate.parentId,
             children: getAllCategoriesFunction(categories, cate._id)
-        });
+        })
     }
     return categoryList;
 }
 
+
 exports.getAllCategories = async (req, res) => {
     try {
-        Category.find({}).exec((error, categories) => {
-            if (error) {
-                return res.status(404).json({ errorMessage: 'Error in finding categories' });
-            }
-            if (categories) {
-                const categoryList = getAllCategoriesFunction(categories);
-                return res.status(200).json(categoryList);
-            }
-        });
+        Category.find({})
+            .exec((error, categories) => {
+                if (error) {
+                    res.status(404).json({ errorMessage: 'Error in finding categories' });
+                }
+                if (categories) {
+                    const categoryList = getAllCategoriesFunction(categories);
+                    res.status(200).send(categoryList);
+                }
+            });
+
     } catch (error) {
         console.log(error);
-        return res.status(400).json(error);
+        res.status(400).send(error);
     }
-};
-
+}
 
 exports.getAllSimpleCategories = async (req, res) => {
     try {
@@ -77,7 +77,7 @@ exports.getAllMainCategories = async (req, res) => {
 }
 
 exports.getAllSubCategories = async (req, res) => {
-    Category.find({ parentId: { $exists: true } }).populate("parentId")
+    Category.find({ parentId: { $exists: true } })
         .exec((error, categories) => {
             if (error) {
                 res.status(404).json({ errorMessage: 'Error in finding categories' });

@@ -1,4 +1,4 @@
-import { isAuthenticated } from '@/components/Commons/Auth/Auth';
+import { isAuthenticated, setAuthentication } from '@/components/Commons/Auth/Auth';
 import { AccountLayout } from '@/components/Layouts/AccountLayout/AccountLayout'
 import { DatePicker, Form, Input, Select } from 'antd';
 import axios from 'axios';
@@ -137,7 +137,7 @@ const ProfilePage = () => {
                         <Select className={styles.Select} placeholder="Select a gender" options={[
                             { value: "male", label: "Male" },
                             { value: "female", label: "Female" },
-                            { value: "others", label: "Others" },
+                            { value: "other", label: "Other" },
                         ]} />
                     </Form.Item>
                     <Form.Item
@@ -153,7 +153,7 @@ const ProfilePage = () => {
                             className={'w-full ' + styles.DatePicker}
                             placeholder="Select your birthday"
                             format="DD/MM/YYYY"
-                            defaultValue={moment(birthday, "DD/MM/YYYY")}
+                            value={moment(birthday, "DD/MM/YYYY")}
                             disabledDate={(current) => current && current > moment().endOf('day')}
                             onChange={(date, dateString) => setBirthday(dateString)}
                         />

@@ -1,5 +1,5 @@
 import { Button, Input, Select } from 'antd'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RightOutlined } from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css';
@@ -9,14 +9,13 @@ import Link from 'next/link';
 import DragUpload from '@/components/Commons/DragUpload/DragUpload';
 import { useRouter } from 'next/router';
 import AdminLayout from '@/components/Layouts/Admin/AdminLayout';
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 const CreateProduct = () => {
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const router = useRouter();
     const [untrimmedCategories, setUntrimmedCategories] = useState([]);
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
-    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
@@ -30,7 +29,6 @@ const CreateProduct = () => {
         description: "",
         mainCategory: "",
         subCategory: "",
-        brand: ""
     });
 
     /*********************************************** onChange *******************************************/
@@ -88,31 +86,8 @@ const CreateProduct = () => {
         })
     }
 
-    const getAllBrands = async () => {
-        setLoading(true);
-        await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/brands/get`).then(res => {
-            setLoading(false);
-            if (res.statusText === "OK") {
-                let formatIt = res.data.map(obj => {
-                    return {
-                        value: obj._id,
-                        label: obj.name
-                    };
-                });
-                setBrands(formatIt)
-            } else {
-                ErrorAlert(res.data.errorMessage);
-            }
-        }).catch(err => {
-            setLoading(false);
-            console.log(err)
-            ErrorAlert(err?.message);
-        })
-    }
-
     useEffect(() => {
-        getAllCategories();
-        getAllBrands();
+        getAllCategories()
 
         return () => {
 
@@ -178,7 +153,7 @@ const CreateProduct = () => {
                         <Select className='w-full' placeholder="Gender" onChange={(value) => handleChange("gender", value)} options={[
                             { value: "male", label: "Male" },
                             { value: "female", label: "Female" },
-                            { value: "others", label: "Others" }
+                            { value: "other", label: "Other" }
                         ]} />
                     </div>
                     <div className='mt-3'>
@@ -212,17 +187,6 @@ const CreateProduct = () => {
                             onChange={(val) => handleChange("subCategory", val)}
                             className='mb-3 w-full'
                             options={subCategories}
-                        />
-                    </div>
-                    <div>
-                        <label>Brand</label> < br />
-                        <Select
-                            showSearch
-                            placeholder="Please select brand"
-                            allowClear
-                            onChange={(val) => handleChange("brand", val)}
-                            className='mb-3 w-full'
-                            options={brands}
                         />
                     </div>
                     <Button type='primary' htmlType="submit" loading={loading} disabled={loading} className="mt-4">Submit</Button>

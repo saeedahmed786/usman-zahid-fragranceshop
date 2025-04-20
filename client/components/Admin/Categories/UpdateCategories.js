@@ -23,7 +23,7 @@ export const UpdateCategories = ({ updateFunction, cat, categories, subCategory 
     });
   }
 
-  
+  console.log(formData);
 
   const showModal = () => {
     setIsModalVisible(true);
